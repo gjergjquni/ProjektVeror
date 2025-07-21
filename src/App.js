@@ -2,7 +2,6 @@ import React, { useState } from 'react';
 import LoginForm from './Components/LoginForm';
 import RegisterForm from './Components/RegisterForm';
 import ForgotPasswordForm from './Components/ForgotPasswordForm';
-import Dashboard from './Components/Dashboard';
 import AuthLayout from './Components/AuthLayout';
 import './App.css';
 import HomeDashboard from './Components/HomeDashboard';
@@ -14,11 +13,6 @@ function App() {
   const handleLogin = (username) => {
     setLoggedInUser(username);
     setPage('dashboard');
-  };
-
-  const handleLogout = () => {
-    setLoggedInUser(null);
-    setPage('login');
   };
 
   // If user is logged in, show dashboard

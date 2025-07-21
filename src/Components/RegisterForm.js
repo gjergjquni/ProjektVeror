@@ -13,7 +13,6 @@ function RegisterForm({ onSwitch }) {
   const [password, setPassword] = useState('');
   const [confirmPassword, setConfirmPassword] = useState('');
   const [isPasswordValid, setIsPasswordValid] = useState(false);
-  const [isConfirmPasswordValid, setIsConfirmPasswordValid] = useState(false);
   const [isMobile, setIsMobile] = useState(false);
 
   useEffect(() => {
@@ -36,24 +35,6 @@ function RegisterForm({ onSwitch }) {
 
   const currentYear = new Date().getFullYear();
   const years = Array.from({ length: 100 }, (_, i) => currentYear - i);
-
-  const validatePassword = (password) => {
-    const errors = [];
-    
-    if (password.length < 8) {
-      errors.push('Fjalëkalimi duhet të ketë të paktën 8 karaktere');
-    }
-    
-    if (!/\d/.test(password)) {
-      errors.push('Fjalëkalimi duhet të përmbajë të paktën një numër');
-    }
-    
-    if (!/[!@#$%^&*(),.?":{}|<>]/.test(password)) {
-      errors.push('Fjalëkalimi duhet të përmbajë të paktën një simbol');
-    }
-    
-    return errors;
-  };
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -187,7 +168,6 @@ function RegisterForm({ onSwitch }) {
           placeholder="Konfirmo fjalëkalimin"
           name="confirm-password"
           required
-          onValidationChange={setIsConfirmPasswordValid}
         />
       </div>
       <button type="submit" style={{

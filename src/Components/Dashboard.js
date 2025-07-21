@@ -1,5 +1,5 @@
 import React from 'react';
-import { FaHome, FaExchangeAlt, FaBullseye, FaRobot, FaCog, FaQuestionCircle, FaPiggyBank, FaWallet, FaArrowUp, FaArrowDown } from 'react-icons/fa';
+import { FaHome, FaExchangeAlt, FaBullseye, FaRobot, FaCog, FaQuestionCircle, FaWallet, FaArrowUp, FaArrowDown } from 'react-icons/fa';
 import './Dashboard.css';
 import logo from '../img/logo1.png';
 import { FaBell, FaExclamationTriangle } from 'react-icons/fa';
@@ -73,12 +73,12 @@ export default function Dashboard() {
           <img src={logo} alt="Logo" />
         </div>
         <nav className="sidebar-menu">
-          <a href="#" className="active"><FaHome /> <span>Ballina</span></a>
-          <a href="#"><FaExchangeAlt /> <span>Transaksionet</span></a>
-          <a href="#"><FaBullseye /> <span>Qëllimet</span></a>
-          <a href="#"><FaRobot className="bot-icon" /> <span>AIChat</span></a>
-          <a href="#"><FaCog /> <span>Settings</span></a>
-          <a href="#"><FaQuestionCircle /> <span>Help</span></a>
+          <a href="/" className="active"><FaHome /> <span>Ballina</span></a>
+          <a href="/transaksionet"><FaExchangeAlt /> <span>Transaksionet</span></a>
+          <a href="/qellimet"><FaBullseye /> <span>Qëllimet</span></a>
+          <a href="/aichat"><FaRobot className="bot-icon" /> <span>AIChat</span></a>
+          <a href="/settings"><FaCog /> <span>Settings</span></a>
+          <a href="/help"><FaQuestionCircle /> <span>Help</span></a>
         </nav>
       </aside>
       {/* Main Content */}
