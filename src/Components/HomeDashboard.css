@@ -1,0 +1,246 @@
+.home-dashboard-container {
+  min-height: 100vh;
+  background: #181926;
+  color: #eaf6fb;
+  font-family: 'Poppins', 'Roboto', Arial, sans-serif;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  padding: 0 0 32px 0;
+}
+.main-content-center {
+  width: 100%;
+  max-width: 950px;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.greeting-section {
+  text-align: center;
+  width: 100%;
+  margin-top: 38px;
+  margin-bottom: 18px;
+}
+.greeting-section h1 {
+  font-size: 2.2rem;
+  font-weight: 800;
+  color: #00b894;
+}
+.greeting-sub {
+  font-size: 1.15rem;
+  color: #b2bec3;
+  margin-top: 6px;
+}
+.main-balance-section {
+  display: flex;
+  gap: 38px;
+  align-items: flex-end;
+  margin-bottom: 32px;
+  flex-wrap: wrap;
+  justify-content: center;
+  width: 100%;
+}
+.balance-card {
+  background: #23243a;
+  border-radius: 18px;
+  box-shadow: 0 2px 16px #00b89411;
+  padding: 32px 48px;
+  min-width: 220px;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.balance-icon {
+  font-size: 2.5rem;
+  color: #00b894;
+  margin-bottom: 8px;
+}
+.balance-label {
+  font-size: 1.1rem;
+  color: #b2bec3;
+  margin-bottom: 6px;
+}
+.balance-value {
+  font-size: 2.3rem;
+  font-weight: 700;
+  color: #fff;
+}
+.income-expense-cards {
+  display: flex;
+  gap: 18px;
+}
+.income-card, .expense-card {
+  background: #23243a;
+  border-radius: 14px;
+  box-shadow: 0 2px 12px #0984e311;
+  padding: 22px 32px;
+  min-width: 160px;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.income-icon {
+  color: #00b894;
+  font-size: 1.6rem;
+  margin-bottom: 6px;
+}
+.expense-icon {
+  color: #e17055;
+  font-size: 1.6rem;
+  margin-bottom: 6px;
+}
+.income-label, .expense-label {
+  font-size: 1.01rem;
+  color: #b2bec3;
+  margin-bottom: 4px;
+}
+.income-value {
+  color: #00b894;
+  font-size: 1.35rem;
+  font-weight: 600;
+}
+.expense-value {
+  color: #e17055;
+  font-size: 1.35rem;
+  font-weight: 600;
+}
+.dashboard-bottom-section {
+  display: flex;
+  gap: 38px;
+  width: 100%;
+  max-width: 1100px;
+  justify-content: center;
+  align-items: flex-start;
+  flex-wrap: wrap;
+}
+.pie-chart-card {
+  background: #23243a;
+  border-radius: 18px;
+  box-shadow: 0 2px 16px #00b89411;
+  padding: 24px 32px 32px 32px;
+  min-width: 320px;
+  text-align: center;
+  flex: 1;
+  max-width: 400px;
+}
+.pie-title {
+  font-size: 1.18rem;
+  color: #fff;
+  font-weight: 600;
+  margin-bottom: 12px;
+}
+.pie-chart {
+  margin-bottom: 18px;
+  background: none;
+  display: block;
+}
+.pie-legend {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  align-items: flex-start;
+  margin-top: 10px;
+}
+.pie-legend-item {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 1.08rem;
+  color: #eaf6fb;
+}
+.pie-color {
+  width: 18px;
+  height: 18px;
+  border-radius: 50%;
+  display: inline-block;
+  margin-right: 4px;
+}
+.compare-notify-section {
+  flex: 1;
+  min-width: 260px;
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+}
+.compare-card {
+  background: #23243a;
+  border-radius: 14px;
+  box-shadow: 0 2px 12px #0984e311;
+  padding: 18px 24px;
+  font-size: 1.13rem;
+  font-weight: 600;
+  text-align: center;
+  margin-bottom: 8px;
+}
+.compare-card.negative {
+  color: #e17055;
+  background: #2d1e1e;
+}
+.compare-card.positive {
+  color: #00b894;
+  background: #1e2d1e;
+}
+.notifications-list {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+.notification-card {
+  background: #23243a;
+  border-radius: 10px;
+  box-shadow: 0 2px 8px #0984e311;
+  padding: 12px 16px;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  font-size: 1.01rem;
+  color: #fff;
+}
+.notification-card.warning {
+  border-left: 4px solid #fbc531;
+}
+.notification-card.info {
+  border-left: 4px solid #00b894;
+}
+.notification-card.danger {
+  border-left: 4px solid #e17055;
+}
+.notif-icon {
+  font-size: 1.2rem;
+}
+.logout-btn {
+  margin-top: auto;
+  width: 80%;
+  margin-bottom: 18px;
+  margin-left: 10%;
+  padding: 12px 0;
+  background: #e17055;
+  color: #fff;
+  border: none;
+  border-radius: 8px;
+  font-size: 1.13rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background 0.18s, color 0.18s;
+  box-shadow: 0 2px 8px #e1705522;
+}
+.logout-btn:hover {
+  background: #c0392b;
+  color: #fff;
+}
+
+@media (max-width: 900px) {
+  .main-balance-section, .dashboard-bottom-section {
+    flex-direction: column;
+    align-items: center;
+    gap: 18px;
+  }
+  .pie-chart-card, .compare-notify-section {
+    max-width: 100vw;
+    min-width: 0;
+    width: 100%;
+  }
+} 

@@ -1,0 +1,23 @@
+.background-blur {
+  position: fixed;
+  top: 0; left: 0; right: 0; bottom: 0;
+  width: 100vw;
+  height: 100vh;
+  z-index: -1;
+  
+  background-size: cover;
+  filter: blur(1.5px);
+  opacity: 0.95;
+  max-height: 100vh;
+}
+
+@media (max-width: 900px) {
+  .background-blur {
+    height: 100vh;
+    min-height: 100vh;
+    max-height: 100vh;
+    width: 100vw;
+    background-position: center center;
+    background-size: cover;
+  }
+}
