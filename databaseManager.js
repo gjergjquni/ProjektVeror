@@ -5,8 +5,6 @@
 
 const sqlite3 = require('sqlite3');
 const path = require('path');
-const crypto = require('crypto');
-const config = require('./config');
 const EventEmitter = require('events');
 const fs = require('fs');
 
@@ -15,26 +13,23 @@ class DatabaseManager extends EventEmitter {
         super();
         this.db = null;
         this.isConnected = false;
-        this.dbPath = path.join(__dirname, 'data', 'elioti.db');
-        this.encryptionKey = process.env.DB_ENCRYPTION_KEY || config.database.encryptionKey;
+        // Use your SQLite database file
+        this.dbPath = 'C:/Users/W11/Desktop/sqlite/mydatabase.db';
         this.queryQueue = [];
-        if (!this.encryptionKey) {
-            throw new Error('Database encryption key is required');
-        }
     }
 
     /**
-     * Connect to SQLCipher database with auto-reconnect
+     * Connect to SQLite database with auto-reconnect
      */
     async connect(retries = 3) {
         return new Promise((resolve, reject) => {
             try {
-                // Ensure data directory exists
+                // Ensure directory exists
                 const dataDir = path.dirname(this.dbPath);
                 if (!fs.existsSync(dataDir)) {
                     fs.mkdirSync(dataDir, { recursive: true });
                 }
-                // Create database connection with encryption
+                // Create database connection (no encryption)
                 this.db = new sqlite3.Database(this.dbPath, (err) => {
                     if (err) {
                         if (retries > 0) {
@@ -45,26 +40,18 @@ class DatabaseManager extends EventEmitter {
                         }
                         return;
                     }
-                    // Set encryption key
-                    this.db.run(`PRAGMA key = '${this.encryptionKey}'`, (err) => {
-                        if (err) {
-                            this.emit('error', err);
-                            reject(new Error(`Database encryption failed: ${err.message}`));
-                            return;
-                        }
-                        // Initialize database schema
-                        this.initializeSchema()
-                            .then(() => {
-                                this.isConnected = true;
-                                this.emit('connect');
-                                console.log('✅ Database connected and encrypted');
-                                resolve();
-                            })
-                            .catch((e) => {
-                                this.emit('error', e);
-                                reject(e);
-                            });
-                    });
+                    // Initialize database schema
+                    this.initializeSchema()
+                        .then(() => {
+                            this.isConnected = true;
+                            this.emit('connect');
+                            console.log('✅ Database connected');
+                            resolve();
+                        })
+                        .catch((e) => {
+                            this.emit('error', e);
+                            reject(e);
+                        });
                 });
                 // Enable foreign keys
                 this.db.run('PRAGMA foreign_keys = ON');
@@ -312,7 +299,7 @@ class DatabaseManager extends EventEmitter {
     }
 
     /**
-     * Backup the encrypted database
+     * Backup the database
      */
     async backup(backupPath) {
         return new Promise((resolve, reject) => {
@@ -325,7 +312,7 @@ class DatabaseManager extends EventEmitter {
     }
 
     /**
-     * Restore the encrypted database from backup
+     * Restore the database from backup
      */
     async restore(backupPath) {
         return new Promise((resolve, reject) => {
@@ -334,22 +321,6 @@ class DatabaseManager extends EventEmitter {
             source.pipe(dest);
             dest.on('finish', resolve);
             dest.on('error', reject);
-        });
-    }
-
-    /**
-     * Rotate the database encryption key
-     */
-    async rotateEncryptionKey(newKey) {
-        return new Promise((resolve, reject) => {
-            this.db.run(`PRAGMA rekey = '${newKey}'`, (err) => {
-                if (err) {
-                    reject(new Error(`Key rotation failed: ${err.message}`));
-                } else {
-                    this.encryptionKey = newKey;
-                    resolve();
-                }
-            });
         });
     }
 
