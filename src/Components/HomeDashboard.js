@@ -23,49 +23,7 @@ const categories = [
 ];
 const total = categories.reduce((sum, c) => sum + c.value, 0);
 
-// Pie chart arc calculation
-function describeArc(cx, cy, r, startAngle, endAngle) {
-  const start = polarToCartesian(cx, cy, r, endAngle);
-  const end = polarToCartesian(cx, cy, r, startAngle);
-  const largeArcFlag = endAngle - startAngle <= 180 ? '0' : '1';
-  return [
-    'M', start.x, start.y,
-    'A', r, r, 0, largeArcFlag, 0, end.x, end.y
-  ].join(' ');
-}
-function polarToCartesian(cx, cy, r, angle) {
-  const rad = (angle - 90) * Math.PI / 180.0;
-  return {
-    x: cx + r * Math.cos(rad),
-    y: cy + r * Math.sin(rad)
-  };
-}
-let currentAngle = 0;
-const arcs = categories.map(cat => {
-  const percent = (cat.value / total) * 100;
-  const angle = (cat.value / total) * 360;
-  const startAngle = currentAngle;
-  const endAngle = currentAngle + angle;
-  const midAngle = (startAngle + endAngle) / 2;
-  currentAngle = endAngle;
-  return {
-    ...cat,
-    percent,
-    startAngle,
-    endAngle,
-    midAngle
-  };
-});
-function getLabelPosition(midAngle, r = 80, cx = 100, cy = 100) {
-  const rad = (midAngle - 90) * (Math.PI / 180);
-  const rr = r * 0.85;
-  return {
-    x: cx + rr * Math.cos(rad),
-    y: cy + rr * Math.sin(rad)
-  };
-}
-
-export default function HomeDashboard() {
+export default function HomeDashboard({ onNavigate }) {
   return (
     <div className="dashboard-container">
       {/* Sidebar */}
@@ -74,12 +32,12 @@ export default function HomeDashboard() {
           <img src={logo} alt="Logo" />
         </div>
         <nav className="sidebar-menu">
-          <a href="/" className="active"><FaHome /> <span>Ballina</span></a>
-          <a href="/transaksionet"><FaExchangeAlt /> <span>Transaksionet</span></a>
-          <a href="/qellimet"><FaBullseye /> <span>Qëllimet</span></a>
-          <a href="/aichat"><FaRobot className="bot-icon" /> <span>AIChat</span></a>
-          <a href="/settings"><FaCog /> <span>Settings</span></a>
-          <a href="/help"><FaQuestionCircle /> <span>Help</span></a>
+          <button type="button" className="active" onClick={e => {e.preventDefault(); onNavigate('dashboard');}}><FaHome /> <span>Ballina</span></button>
+          <button type="button" onClick={e => {e.preventDefault(); onNavigate('transaksionet');}}><FaExchangeAlt /> <span>Transaksionet</span></button>
+          <button type="button" onClick={e => {e.preventDefault(); onNavigate('qellimet');}}><FaBullseye /> <span>Qëllimet</span></button>
+          <button type="button" onClick={e => {e.preventDefault(); onNavigate('aichat');}}><FaRobot className="bot-icon" /> <span>AIChat</span></button>
+          <button type="button" onClick={e => {e.preventDefault(); onNavigate('settings');}}><FaCog /> <span>Settings</span></button>
+          <button type="button" onClick={e => {e.preventDefault(); onNavigate('help');}}><FaQuestionCircle /> <span>Help</span></button>
         </nav>
         <button className="logout-btn" onClick={() => window.location.href = '/'}>Dil</button>
       </aside>
@@ -112,39 +70,27 @@ export default function HomeDashboard() {
           <div className="dashboard-bottom-section">
             <div className="pie-chart-card">
               <div className="pie-title">Shpenzimet sipas kategorive</div>
-              <svg viewBox="0 0 200 200" width="220" height="220" className="pie-chart">
-                {arcs.map((arc, i) => (
-                  <React.Fragment key={arc.name}>
-                    <path
-                      d={describeArc(100, 100, 80, arc.startAngle, arc.endAngle)}
-                      fill="none"
-                      stroke={arc.color}
-                      strokeWidth="32"
-                      strokeLinecap="butt"
-                    />
-                    <text
-                      x={getLabelPosition(arc.midAngle).x}
-                      y={getLabelPosition(arc.midAngle).y}
-                      textAnchor="middle"
-                      dominantBaseline="middle"
-                      fontSize="1rem"
-                      fill="#fff"
-                      fontWeight="bold"
-                    >
-                      {Math.round(arc.percent)}%
-                    </text>
-                  </React.Fragment>
-                ))}
-                {/* Donut hole */}
-                <circle cx="100" cy="100" r="56" fill="#181926" />
-              </svg>
-              <div className="pie-legend">
-                {categories.map(cat => (
-                  <div key={cat.name} className="pie-legend-item">
-                    <span className="pie-color" style={{background: cat.color}}></span>
-                    <span>{cat.name} ({cat.value}€)</span>
-                  </div>
-                ))}
+              <div style={{display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', gap: '12px'}}>
+                <div style={{
+                  width: '140px',
+                  height: '140px',
+                  borderRadius: '50%',
+                  background: `conic-gradient(${categories.map((cat, i) => `${cat.color} ${i === 0 ? 0 : (categories.slice(0, i).reduce((a, c) => a + c.value, 0) / total) * 100}%, ${cat.color} ${(categories.slice(0, i + 1).reduce((a, c) => a + c.value, 0) / total) * 100}%`).join(', ')})`,
+                  border: '10px solid #181926',
+                  boxSizing: 'border-box',
+                  position: 'relative',
+                  marginBottom: '8px',
+                }}>
+                  {/* No text inside the chart */}
+                </div>
+                <div className="pie-legend">
+                  {categories.map(cat => (
+                    <div key={cat.name} className="pie-legend-item">
+                      <span className="pie-color" style={{background: cat.color}}></span>
+                      <span>{cat.name} ({cat.value}€)</span>
+                    </div>
+                  ))}
+                </div>
               </div>
             </div>
             <div className="compare-notify-section">

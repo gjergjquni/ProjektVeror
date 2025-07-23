@@ -266,6 +266,7 @@ h2 {
   .auth-left img, .auth-left .logo {
     max-width: 200px;
     margin-bottom: 12px;
+    
     }
     .auth-right {
     min-height: 0;
