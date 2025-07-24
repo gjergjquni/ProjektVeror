@@ -1,8 +1,4 @@
 {
-<<<<<<< HEAD
-  "dependencies": {
-    "react-icons": "^5.5.0"
-=======
   "name": "elioti-backend",
   "version": "2.0.0",
   "description": "Secure Node.js backend for Elioti Financial Platform",
@@ -21,7 +17,8 @@
     "jsonwebtoken": "^9.0.2",
     "express-rate-limit": "^7.1.5",
     "nodemailer": "^6.9.7",
-    "crypto": "^1.0.1"
+    "crypto": "^1.0.1",
+    "react-icons": "^5.5.0"
   },
   "devDependencies": {
     "nodemon": "^3.0.2"
@@ -31,6 +28,5 @@
   "license": "MIT",
   "engines": {
     "node": ">=16.0.0"
->>>>>>> 150caa9ea859636732ae8f3373f6ba3a1c3cbbda
   }
 }
