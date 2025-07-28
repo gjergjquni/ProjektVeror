@@ -4,9 +4,9 @@
  */
 
 const bcrypt = require('bcrypt');
-const Validators = require('../validators');
-const ErrorHandler = require('../errorHandler');
-const config = require('../config');
+const Validators = require('./validators');
+const ErrorHandler = require('./errorHandler');
+const config = require('./config');
 
 class AuthRoutes {
     /**

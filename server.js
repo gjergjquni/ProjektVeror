@@ -19,10 +19,10 @@ const DatabaseManager = require('./databaseManager');
 const RateLimiter = require('./rateLimiter');
 
 // Import route handlers
-const authRoutes = require('./routes/authRoutes');
-const userRoutes = require('./routes/userRoutes');
-const transactionRoutes = require('./routes/transactionRoutes');
-const profileRoutes = require('./routes/profileRoutes');
+const authRoutes = require('./authRoutes');
+const userRoutes = require('./userRoutes');
+const transactionRoutes = require('./transactionRoutes');
+const profileRoutes = require('./profileRoutes');
 
 class EliotiServer {
     constructor() {

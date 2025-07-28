@@ -3,8 +3,8 @@
  * Handles financial transaction operations with proper validation and security
  */
 
-const Validators = require('../validators');
-const ErrorHandler = require('../errorHandler');
+const Validators = require('./validators');
+const ErrorHandler = require('./errorHandler');
 
 class TransactionRoutes {
     async handle(req, res, context) {
