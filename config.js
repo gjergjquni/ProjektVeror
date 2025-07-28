@@ -121,7 +121,8 @@ config.isTest = () => config.server.environment === 'test';
 config.validate = () => {
     const errors = [];
     
-    if (!config.security.jwtSecret || config.security.jwtSecret === 'your-secret-key-change-in-production') {
+    // Only require JWT_SECRET in production
+    if (config.isProduction() && (!config.security.jwtSecret || config.security.jwtSecret === 'your-secret-key-change-in-production')) {
         errors.push('JWT_SECRET duhet të konfigurohet në production');
     }
     
