@@ -1,20 +1,30 @@
+// EmailService.js
+
 const nodemailer = require('nodemailer');
 const config = require('./config');
 
 class EmailService {
     constructor() {
+        const emailUser = process.env.EMAIL_USER;
+        const emailPass = process.env.EMAIL_PASSWORD;
+
+        if (!emailUser || !emailPass) {
+            console.error('Email service credentials are not configured in .env file.');
+            throw new Error('Email service is not configured.');
+        }
+
         this.transporter = nodemailer.createTransporter({
             service: 'gmail',
             auth: {
-                user: process.env.EMAIL_USER || 'your-email@gmail.com',
-                pass: process.env.EMAIL_PASSWORD || 'your-app-password'
+                user: emailUser,
+                pass: emailPass
             }
         });
     }
 
     async sendVerificationCode(email, code) {
         const mailOptions = {
-            from: process.env.EMAIL_USER || 'noreply@elioti.com',
+            from: process.env.EMAIL_USER,
             to: email,
             subject: 'Elioti - Kodi i Verifikimit',
             html: `
@@ -40,4 +50,4 @@ class EmailService {
     }
 }
 
-module.exports = EmailService; 
+module.exports = EmailService;

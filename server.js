@@ -4,7 +4,6 @@
  */
 
 const http = require('http');
-const https = require('https');
 const fs = require('fs');
 const path = require('path');
 const url = require('url');
@@ -27,8 +26,11 @@ const profileRoutes = require('./profileRoutes');
 class EliotiServer {
     constructor() {
         this.sessionManager = new SessionManager();
-        this.authMiddleware = new AuthMiddleware(this.sessionManager);
         this.databaseManager = new DatabaseManager();
+        
+        // Correctly pass dependencies to the middleware constructor
+        this.authMiddleware = new AuthMiddleware(this.sessionManager, this.databaseManager); 
+        
         this.rateLimiter = new RateLimiter();
         
         // Initialize route handlers
@@ -175,7 +177,7 @@ class EliotiServer {
         res.setHeader('Access-Control-Allow-Origin', config.cors.origin);
         res.setHeader('Access-Control-Allow-Methods', config.cors.methods.join(', '));
         res.setHeader('Access-Control-Allow-Headers', config.cors.allowedHeaders.join(', '));
-        res.setHeader('Access-Control-Max-Age', '86400'); // 24 hours
+        res.setHeader('Access-control-max-age', '86400'); // 24 hours
     }
 
     /**
@@ -210,23 +212,14 @@ class EliotiServer {
         const shutdown = async (signal) => {
             console.log(`\n🛑 Received ${signal}. Starting graceful shutdown...`);
             
-            // Close server
             if (this.server) {
                 this.server.close(() => {
                     console.log('✅ HTTP server closed');
                 });
             }
             
-            // Close database connections
             if (this.databaseManager) {
                 await this.databaseManager.disconnect();
-                console.log('✅ Database connections closed');
-            }
-            
-            // Cleanup sessions
-            if (this.sessionManager) {
-                this.sessionManager.cleanupExpiredSessions();
-                console.log('✅ Sessions cleaned up');
             }
             
             console.log('👋 Server shutdown complete');
@@ -247,4 +240,4 @@ if (require.main === module) {
     });
 }
 
-module.exports = EliotiServer; 
+module.exports = EliotiServer;
