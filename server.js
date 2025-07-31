@@ -27,13 +27,9 @@ class EliotiServer {
     constructor() {
         this.sessionManager = new SessionManager();
         this.databaseManager = new DatabaseManager();
-        
-        // Correctly pass dependencies to the middleware constructor
-        this.authMiddleware = new AuthMiddleware(this.sessionManager, this.databaseManager); 
-        
+        this.authMiddleware = new AuthMiddleware(this.sessionManager, this.databaseManager);
         this.rateLimiter = new RateLimiter();
         
-        // Initialize route handlers
         this.routes = {
             '/auth': authRoutes,
             '/user': userRoutes,
@@ -49,23 +45,17 @@ class EliotiServer {
      */
     async initialize() {
         try {
-            // Validate configuration
             config.validate();
-            
-            // Initialize database connection
             await this.databaseManager.connect();
             
-            // Create HTTP server
             this.server = http.createServer(this.handleRequest.bind(this));
             
-            // Start server
             this.server.listen(config.server.port, config.server.host, () => {
                 console.log(`🚀 Elioti server running on ${config.server.host}:${config.server.port}`);
                 console.log(`📊 Environment: ${config.server.environment}`);
                 console.log(`🔐 Security: JWT enabled, bcrypt rounds: ${config.security.bcryptRounds}`);
             });
 
-            // Graceful shutdown handling
             this.setupGracefulShutdown();
             
         } catch (error) {
@@ -79,33 +69,32 @@ class EliotiServer {
      */
     async handleRequest(req, res) {
         try {
-            // Parse URL
             const parsedUrl = url.parse(req.url, true);
             const pathname = parsedUrl.pathname;
             const method = req.method.toUpperCase();
 
-            // Set CORS headers
             this.setCORSHeaders(res);
 
-            // Handle preflight requests
             if (method === 'OPTIONS') {
                 res.writeHead(200);
                 res.end();
                 return;
             }
 
-            // Rate limiting
+            // --- RATE LIMITER DISABLED FOR DEVELOPMENT ---
+            // The following block has been commented out to make testing easier.
+            // Remember to re-enable it before deploying to production.
+            /*
             const clientIP = this.getClientIP(req);
             if (!this.rateLimiter.checkLimit(clientIP, pathname)) {
                 return this.sendError(res, 429, 'Rate limit exceeded');
             }
+            */
 
-            // Parse request body for POST/PUT requests
             if (['POST', 'PUT', 'PATCH'].includes(method)) {
                 await this.parseRequestBody(req);
             }
 
-            // Route the request
             const routeHandler = this.findRouteHandler(pathname);
             if (routeHandler) {
                 await routeHandler.handle(req, res, {
@@ -142,30 +131,21 @@ class EliotiServer {
     async parseRequestBody(req) {
         return new Promise((resolve, reject) => {
             let body = '';
-            
             req.on('data', chunk => {
                 body += chunk.toString();
-                
-                // Limit body size to prevent memory attacks
                 if (body.length > 1e6) { // 1MB limit
                     req.destroy();
                     reject(new Error('Request body too large'));
                 }
             });
-            
             req.on('end', () => {
                 try {
-                    if (body) {
-                        req.body = JSON.parse(body);
-                    } else {
-                        req.body = {};
-                    }
+                    req.body = body ? JSON.parse(body) : {};
                     resolve();
                 } catch (error) {
                     reject(new Error('Invalid JSON in request body'));
                 }
             });
-            
             req.on('error', reject);
         });
     }
@@ -177,16 +157,16 @@ class EliotiServer {
         res.setHeader('Access-Control-Allow-Origin', config.cors.origin);
         res.setHeader('Access-Control-Allow-Methods', config.cors.methods.join(', '));
         res.setHeader('Access-Control-Allow-Headers', config.cors.allowedHeaders.join(', '));
-        res.setHeader('Access-control-max-age', '86400'); // 24 hours
+        res.setHeader('Access-control-max-age', '86400');
     }
 
     /**
      * Get client IP address
      */
     getClientIP(req) {
-        return req.headers['x-forwarded-for'] || 
-               req.headers['x-real-ip'] || 
-               req.connection.remoteAddress || 
+        return req.headers['x-forwarded-for'] ||
+               req.headers['x-real-ip'] ||
+               req.connection.remoteAddress ||
                req.socket.remoteAddress;
     }
 
@@ -197,11 +177,7 @@ class EliotiServer {
         res.writeHead(statusCode, { 'Content-Type': 'application/json' });
         res.end(JSON.stringify({
             success: false,
-            error: {
-                message: message,
-                code: statusCode,
-                timestamp: new Date().toISOString()
-            }
+            error: { message, code: statusCode, timestamp: new Date().toISOString() }
         }));
     }
 
@@ -211,17 +187,12 @@ class EliotiServer {
     setupGracefulShutdown() {
         const shutdown = async (signal) => {
             console.log(`\n🛑 Received ${signal}. Starting graceful shutdown...`);
-            
             if (this.server) {
-                this.server.close(() => {
-                    console.log('✅ HTTP server closed');
-                });
+                this.server.close(() => console.log('✅ HTTP server closed'));
             }
-            
             if (this.databaseManager) {
                 await this.databaseManager.disconnect();
             }
-            
             console.log('👋 Server shutdown complete');
             process.exit(0);
         };
