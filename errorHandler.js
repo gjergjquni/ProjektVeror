@@ -8,19 +8,19 @@ class ErrorHandler {
     }
 
     // Middleware për të kapur gabimet
+    // NOTE: This function is written for Express.js and won't work with the native http server.
+    // The native http server handles errors within the main handleRequest function.
     static handleError(err, req, res, next) {
         console.error('Error:', err);
 
-        // Nëse gabimi ka tashmë statusCode, përdore atë
         const statusCode = err.statusCode || 500;
         const message = err.message || 'Gabim i brendshëm i serverit';
         const errorCode = err.errorCode || 'INTERNAL_ERROR';
 
-        // Përgjigja e gabimit
         res.status(statusCode).json({
             success: false,
             error: {
-                message: message,  
+                message: message,
                 code: errorCode,
                 timestamp: new Date().toISOString()
             }
@@ -69,8 +69,10 @@ class ErrorHandler {
             request: req ? {
                 method: req.method,
                 url: req.url,
-                ip: req.ip,
-                userAgent: req.get('User-Agent')
+                // FIX 1: Use native Node.js syntax for IP address
+                ip: req.socket.remoteAddress,
+                // FIX 2: Use native Node.js syntax for headers
+                userAgent: req.headers['user-agent'] 
             } : null
         };
 
@@ -81,4 +83,4 @@ class ErrorHandler {
     }
 }
 
-module.exports = ErrorHandler; 
+module.exports = ErrorHandler;
