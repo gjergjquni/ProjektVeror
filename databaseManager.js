@@ -1,8 +1,3 @@
-/**
- * Database Manager for SQLite
- * Handles database connections and operations
- */
-
 const sqlite3 = require('sqlite3');
 const path = require('path');
 const EventEmitter = require('events');
@@ -13,30 +8,22 @@ class DatabaseManager extends EventEmitter {
         super();
         this.db = null;
         this.isConnected = false;
-
-        // CORRECTED: Use a dynamic path that always works
         this.dbPath = path.resolve(__dirname, 'sqlite', 'mydatabase.db');
-        
-        this.queryQueue = [];
     }
 
     async connect() {
         return new Promise((resolve, reject) => {
             try {
-                // Ensure the /sqlite directory exists
                 const dataDir = path.dirname(this.dbPath);
                 if (!fs.existsSync(dataDir)) {
                     fs.mkdirSync(dataDir, { recursive: true });
                 }
 
                 this.db = new sqlite3.Database(this.dbPath, (err) => {
-                    if (err) {
-                        return reject(new Error(`Database connection failed: ${err.message}`));
-                    }
+                    if (err) return reject(new Error(`DB connection failed: ${err.message}`));
                     
                     this.db.run('PRAGMA foreign_keys = ON', (pragmaErr) => {
                         if (pragmaErr) return reject(pragmaErr);
-
                         this.initializeSchema()
                             .then(() => {
                                 this.isConnected = true;
@@ -44,7 +31,7 @@ class DatabaseManager extends EventEmitter {
                                 console.log('✅ Database connected and schema is ready.');
                                 resolve();
                             })
-                            .catch((e) => reject(e));
+                            .catch(reject);
                     });
                 });
             } catch (error) {
@@ -69,11 +56,29 @@ class DatabaseManager extends EventEmitter {
                 FOREIGN KEY (user_id) REFERENCES users(id) ON DELETE CASCADE
             );
             CREATE TABLE IF NOT EXISTS transactions (
-                id TEXT PRIMARY KEY, user_id TEXT NOT NULL, amount REAL NOT NULL,
-                type TEXT NOT NULL CHECK (type IN ('income', 'expense')), category TEXT NOT NULL,
-                description TEXT, transaction_date TEXT NOT NULL, created_at TEXT DEFAULT CURRENT_TIMESTAMP,
+                id TEXT PRIMARY KEY,
+                user_id TEXT NOT NULL,
+                name TEXT NOT NULL,
+                amount REAL NOT NULL,
+                type TEXT NOT NULL CHECK (type IN ('income', 'expense')),
+                category TEXT NOT NULL,
+                description TEXT,
+                date TEXT NOT NULL,
+                method TEXT,
+                created_at TEXT DEFAULT CURRENT_TIMESTAMP,
                 updated_at TEXT DEFAULT CURRENT_TIMESTAMP,
                 FOREIGN KEY (user_id) REFERENCES users(id) ON DELETE CASCADE
+            );
+            CREATE TABLE IF NOT EXISTS goals (
+                id TEXT PRIMARY KEY,
+                user_id TEXT NOT NULL,
+                name TEXT NOT NULL,
+                target_amount REAL NOT NULL,
+                saved_amount REAL DEFAULT 0,
+                category TEXT,
+                target_date TEXT,
+                created_at DATETIME DEFAULT CURRENT_TIMESTAMP,
+                FOREIGN KEY (user_id) REFERENCES users(id)
             );
             CREATE TABLE IF NOT EXISTS blacklisted_tokens (
                 token_hash TEXT PRIMARY KEY, user_id TEXT NOT NULL, expires_at TEXT NOT NULL,
@@ -88,7 +93,6 @@ class DatabaseManager extends EventEmitter {
             CREATE INDEX IF NOT EXISTS idx_users_email ON users(email);
             CREATE INDEX IF NOT EXISTS idx_transactions_user_id ON transactions(user_id);
         `;
-        // Use this.db.exec for multiple statements
         return new Promise((resolve, reject) => {
             this.db.exec(schema, (err) => {
                 if (err) return reject(err);
@@ -136,13 +140,9 @@ class DatabaseManager extends EventEmitter {
                     else console.log('✅ Database connection closed');
                     resolve();
                 });
-            } else {
-                resolve();
-            }
+            } else resolve();
         });
     }
-    
-    // All other helper methods like transaction, logAuditEvent, etc. can remain the same
 }
 
 module.exports = DatabaseManager;

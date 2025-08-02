@@ -1,26 +1,21 @@
-/**
- * Main server file for Elioti Financial Platform
- * Uses native Node.js http module for better security and control
- */
-
 const http = require('http');
 const fs = require('fs');
 const path = require('path');
 const url = require('url');
 
-// Import core modules
+// Core modules
 const config = require('./config');
 const ErrorHandler = require('./errorHandler');
 const SessionManager = require('./sessionManager');
 const AuthMiddleware = require('./authMiddleware');
-const Validators = require('./validators');
 const DatabaseManager = require('./databaseManager');
 const RateLimiter = require('./rateLimiter');
 
-// Import route handlers
+// Route handlers
 const authRoutes = require('./authRoutes');
 const userRoutes = require('./userRoutes');
 const transactionRoutes = require('./transactionRoutes');
+const goalRoutes = require('./goalRoutes');
 const profileRoutes = require('./profileRoutes');
 
 class EliotiServer {
@@ -34,39 +29,28 @@ class EliotiServer {
             '/auth': authRoutes,
             '/user': userRoutes,
             '/transaction': transactionRoutes,
+            '/goal': goalRoutes,
             '/profile': profileRoutes
         };
         
         this.server = null;
     }
 
-    /**
-     * Initialize the server
-     */
     async initialize() {
         try {
             config.validate();
             await this.databaseManager.connect();
-            
             this.server = http.createServer(this.handleRequest.bind(this));
-            
             this.server.listen(config.server.port, config.server.host, () => {
                 console.log(`🚀 Elioti server running on ${config.server.host}:${config.server.port}`);
-                console.log(`📊 Environment: ${config.server.environment}`);
-                console.log(`🔐 Security: JWT enabled, bcrypt rounds: ${config.security.bcryptRounds}`);
             });
-
             this.setupGracefulShutdown();
-            
         } catch (error) {
             console.error('❌ Failed to initialize server:', error);
             process.exit(1);
         }
     }
 
-    /**
-     * Main request handler
-     */
     async handleRequest(req, res) {
         try {
             const parsedUrl = url.parse(req.url, true);
@@ -80,16 +64,6 @@ class EliotiServer {
                 res.end();
                 return;
             }
-
-            // --- RATE LIMITER DISABLED FOR DEVELOPMENT ---
-            // The following block has been commented out to make testing easier.
-            // Remember to re-enable it before deploying to production.
-            /*
-            const clientIP = this.getClientIP(req);
-            if (!this.rateLimiter.checkLimit(clientIP, pathname)) {
-                return this.sendError(res, 429, 'Rate limit exceeded');
-            }
-            */
 
             if (['POST', 'PUT', 'PATCH'].includes(method)) {
                 await this.parseRequestBody(req);
@@ -106,28 +80,19 @@ class EliotiServer {
             } else {
                 this.sendError(res, 404, 'Route not found');
             }
-
         } catch (error) {
             ErrorHandler.logError(error, req);
             this.sendError(res, 500, 'Internal server error');
         }
     }
 
-    /**
-     * Find appropriate route handler
-     */
     findRouteHandler(pathname) {
         for (const [prefix, handler] of Object.entries(this.routes)) {
-            if (pathname.startsWith(prefix)) {
-                return handler;
-            }
+            if (pathname.startsWith(prefix)) return handler;
         }
         return null;
     }
 
-    /**
-     * Parse request body
-     */
     async parseRequestBody(req) {
         return new Promise((resolve, reject) => {
             let body = '';
@@ -150,9 +115,6 @@ class EliotiServer {
         });
     }
 
-    /**
-     * Set CORS headers
-     */
     setCORSHeaders(res) {
         res.setHeader('Access-Control-Allow-Origin', config.cors.origin);
         res.setHeader('Access-Control-Allow-Methods', config.cors.methods.join(', '));
@@ -160,19 +122,6 @@ class EliotiServer {
         res.setHeader('Access-control-max-age', '86400');
     }
 
-    /**
-     * Get client IP address
-     */
-    getClientIP(req) {
-        return req.headers['x-forwarded-for'] ||
-               req.headers['x-real-ip'] ||
-               req.connection.remoteAddress ||
-               req.socket.remoteAddress;
-    }
-
-    /**
-     * Send error response
-     */
     sendError(res, statusCode, message) {
         res.writeHead(statusCode, { 'Content-Type': 'application/json' });
         res.end(JSON.stringify({
@@ -181,28 +130,19 @@ class EliotiServer {
         }));
     }
 
-    /**
-     * Setup graceful shutdown
-     */
     setupGracefulShutdown() {
         const shutdown = async (signal) => {
             console.log(`\n🛑 Received ${signal}. Starting graceful shutdown...`);
-            if (this.server) {
-                this.server.close(() => console.log('✅ HTTP server closed'));
-            }
-            if (this.databaseManager) {
-                await this.databaseManager.disconnect();
-            }
+            if (this.server) this.server.close(() => console.log('✅ HTTP server closed'));
+            if (this.databaseManager) await this.databaseManager.disconnect();
             console.log('👋 Server shutdown complete');
             process.exit(0);
         };
-
         process.on('SIGTERM', () => shutdown('SIGTERM'));
         process.on('SIGINT', () => shutdown('SIGINT'));
     }
 }
 
-// Start server if this file is run directly
 if (require.main === module) {
     const server = new EliotiServer();
     server.initialize().catch(error => {
