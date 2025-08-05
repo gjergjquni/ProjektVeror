@@ -3,7 +3,7 @@ import React, { useState } from 'react';
 import './Transaksionet.css';
 import logo from '../img/logo1.png';
 // Importimi i ikonave nga react-icons për të përdorur në aplikacion
-import { FaHome, FaExchangeAlt, FaBullseye, FaRobot, FaCog, FaQuestionCircle, FaEdit, FaTrash, FaPlus, FaUtensils, FaBus, FaMoneyBillWave, FaFilm, FaQuestion, FaBars, FaTimes, FaDownload } from 'react-icons/fa';
+import { FaHome, FaExchangeAlt, FaBullseye, FaRobot, FaCog, FaQuestionCircle, FaEdit, FaTrash, FaPlus, FaUtensils, FaBus, FaMoneyBillWave, FaFilm, FaQuestion, FaBars, FaTimes } from 'react-icons/fa';
 
 // Lista e kategorive të transaksioneve me ikonat e tyre
 const kategoriaOptions = [
@@ -183,46 +183,48 @@ const Transaksionet = ({ onNavigate, currentPage, transaksionet, setTransaksione
       {/* Përmbajtja kryesore e faqes */}
       <main className="dashboard-main">
         <div className="transaksionet-advanced-container">
-          {/* Header-i me titull dhe butona */}
-          <div className="transaksionet-header-advanced">
-            <div>
-              <h2>Transaksionet e tua</h2>
-              <p className="transaksionet-desc">Këtu mund të shikosh të gjitha transaksionet mujore, t'i filtroni, kërkoni dhe analizoni me lehtësi.</p>
-            </div>
-            <div className="transaksionet-action-buttons">
-              {/* Butoni për të shtuar transaksion të ri */}
-              <button className="add-btn" onClick={() => setShowModal(true)}><FaPlus /> Shto transaksion</button>
-              {/* Butoni për të importuar transaksione nga banka */}
-              <button className="import-btn" onClick={() => alert('Funksionaliteti për importimin e transaksioneve nga banka do të jetë i disponueshëm së shpejti!')}><FaDownload /> Importo nga banka</button>
-            </div>
-          </div>
+                     {/* Header-i me titull */}
+           <div className="transaksionet-header-advanced">
+             <div>
+               <h2>Transaksionet e tua</h2>
+               <p className="transaksionet-desc">Këtu mund të shikosh të gjitha transaksionet mujore, t'i filtroni, kërkoni dhe analizoni me lehtësi.</p>
+             </div>
+           </div>
 
-          {/* Seksioni i balancës dhe grafikut pie */}
-          <div className="transaksionet-balance-chart-row">
-            {/* Kutia e balancës */}
-            <div className="transaksionet-balance-box">
-              Balanci aktual: <span style={{color: balanca >= 0 ? '#1de9b6' : '#ff8661'}}>{balanca >= 0 ? '+' : ''}{balanca}€</span>
-            </div>
-            
-            {/* Grafiku pie për të ardhura/shpenzime */}
-            <div className="transaksionet-pie-chart" style={{display: 'flex', flexDirection: 'row', alignItems: 'center', gap: '28px'}}>
-              <div style={{
-                width: '100px',
-                height: '100px',
-                borderRadius: '50%',
-                background: `conic-gradient(#1de9b6 0% ${percTeArdhura}%, #ff8661 ${percTeArdhura}% 100%)`,
-                border: '7px solid #23243a',
-                boxSizing: 'border-box',
-                position: 'relative',
-              }}>
-                {/* Grafiku pie - nuk ka tekst brenda */}
+                       {/* Seksioni i balancës, butonit dhe grafikut pie */}
+            <div className="transaksionet-balance-chart-row">
+                             {/* Seksioni i majtë - Butoni dhe Balanci */}
+               <div style={{display: 'flex', flexDirection: 'column', gap: '16px', alignItems: 'flex-start'}}>
+                 {/* Butoni për të shtuar transaksion të ri */}
+                 <div className="transaksionet-action-buttons">
+                   <button className="add-btn" onClick={() => setShowModal(true)}><FaPlus /> Shto transaksion</button>
+                 </div>
+                 
+                 {/* Kutia e balancës */}
+                 <div className="transaksionet-balance-box">
+                   Balanci aktual: <span style={{color: balanca >= 0 ? '#1de9b6' : '#ff8661'}}>{balanca >= 0 ? '+' : ''}{balanca}€</span>
+                 </div>
+               </div>
+              
+              {/* Grafiku pie për të ardhura/shpenzime - në të djathtë */}
+              <div className="transaksionet-pie-chart" style={{display: 'flex', flexDirection: 'row', alignItems: 'center', gap: '28px', marginLeft: '60px'}}>
+                <div style={{
+                  width: '140px',
+                  height: '140px',
+                  borderRadius: '50%',
+                  background: `conic-gradient(#1de9b6 0% ${percTeArdhura}%, #ff8661 ${percTeArdhura}% 100%)`,
+                  border: '8px solid #23243a',
+                  boxSizing: 'border-box',
+                  position: 'relative',
+                }}>
+                  {/* Grafiku pie - nuk ka tekst brenda */}
+                </div>
+                <div style={{display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', gap: '8px', height: '140px'}}>
+                  <span style={{color:'#1de9b6', fontWeight:'bold', fontSize:'1.4rem'}}>{percTeArdhura}% <span style={{color:'#b2dfdb', fontWeight:400, fontSize:'1.2rem'}}>Të ardhura</span></span>
+                  <span style={{color:'#ff8661', fontWeight:'bold', fontSize:'1.4rem'}}>{percShpenzime}% <span style={{color:'#b2dfdb', fontWeight:400, fontSize:'1.2rem'}}>Shpenzime</span></span>
+                </div>
               </div>
-              <div style={{display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', gap: '6px', height: '100px'}}>
-                <span style={{color:'#1de9b6', fontWeight:'bold', fontSize:'1.18rem'}}>{percTeArdhura}% <span style={{color:'#b2dfdb', fontWeight:400, fontSize:'1.08rem'}}>Të ardhura</span></span>
-                <span style={{color:'#ff8661', fontWeight:'bold', fontSize:'1.18rem'}}>{percShpenzime}% <span style={{color:'#b2dfdb', fontWeight:400, fontSize:'1.08rem'}}>Shpenzime</span></span>
-              </div>
             </div>
-          </div>
 
           {/* Seksioni i filtrave dhe kërkimit */}
           <div className="transaksionet-filters-advanced">

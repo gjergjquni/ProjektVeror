@@ -9,6 +9,7 @@ import './App.css';
 import HomeDashboard from './Components/HomeDashboard';
 import Transaksionet from './Components/Transaksionet';
 import Qellimet from './Components/Qellimet';
+import AIChat from './Components/AIChat';
 
 // Të dhënat fillestare të transaksioneve - këto janë transaksione shembull që shfaqen kur aplikacioni hapet
 const initialTransaksionet = [
@@ -58,6 +59,15 @@ function App() {
   // Nëse përdoruesi është loguar dhe ka zgjedhur faqen e qëllimeve
   if (page === 'qellimet' && loggedInUser) {
     return <Qellimet
+      currentPage={page}
+      onNavigate={setPage}
+    />;
+  }
+
+  // Kontrolli i faqes së AI Chat
+  // Nëse përdoruesi është loguar dhe ka zgjedhur faqen e AI Chat
+  if (page === 'aichat' && loggedInUser) {
+    return <AIChat
       currentPage={page}
       onNavigate={setPage}
     />;
