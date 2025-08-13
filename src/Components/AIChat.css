@@ -698,126 +698,24 @@
   .message-text {
     font-size: 0.9rem;
   }
-}
+  
 
-/* Modal për konfirmimin e daljes */
-.modal-bg {
-  position: fixed;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  background: rgba(0, 0, 0, 0.8);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  z-index: 1000;
-  backdrop-filter: blur(4px);
-}
-
-.modal-content {
-  background: #23243a;
-  border-radius: 16px;
-  padding: 32px;
-  width: 90%;
-  max-width: 500px;
-  max-height: 90vh;
-  overflow-y: auto;
-  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.5);
-}
-
-.modal-header {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  margin-bottom: 20px;
-  padding-bottom: 16px;
-  border-bottom: 1px solid #3d3f55;
-}
-
-.modal-header h3 {
-  margin: 0;
-  color: #1de9b6;
-  font-size: 1.4rem;
-  font-weight: 700;
-  text-transform: uppercase;
-  letter-spacing: 1px;
-}
-
-.modal-close-btn {
-  background: rgba(255, 255, 255, 0.1);
-  border: 1px solid #3d3f55;
-  border-radius: 8px;
-  width: 32px;
-  height: 32px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  color: #b2dfdb;
-  cursor: pointer;
-  transition: all 0.3s ease;
-  font-size: 0.9rem;
-}
-
-.modal-close-btn:hover {
-  background: rgba(255, 255, 255, 0.2);
-  color: #eaf6f7;
-  transform: scale(1.1);
-}
-
-.modal-body {
-  padding: 20px 0;
-  text-align: center;
-}
-
-.modal-body p {
-  font-size: 1rem;
-  color: #b2dfdb;
-  margin: 0;
-  line-height: 1.6;
-}
-
-.modal-actions {
-  display: flex;
-  flex-direction: column;
-  gap: 12px;
-  margin-top: 20px;
-}
-
-.modal-actions .cancel-btn,
-.modal-actions .confirm-btn {
-  width: 100%;
-  padding: 12px 20px;
-  border: none;
-  border-radius: 10px;
-  font-size: 0.95rem;
-  font-weight: 600;
-  cursor: pointer;
-  transition: all 0.3s ease;
-  text-transform: uppercase;
-  letter-spacing: 0.5px;
-}
-
-.modal-actions .cancel-btn {
-  background: rgba(255, 255, 255, 0.1);
-  color: #b2dfdb;
-  border: 1px solid #3d3f55;
-}
-
-.modal-actions .cancel-btn:hover {
-  background: rgba(255, 255, 255, 0.2);
-  color: #eaf6f7;
-  transform: translateY(-1px);
-}
-
-.modal-actions .confirm-btn {
-  background: linear-gradient(135deg, #ff6b6b, #ee5a52);
-  color: white;
-  box-shadow: 0 4px 16px rgba(255, 107, 107, 0.3);
-}
-
-.modal-actions .confirm-btn:hover {
-  transform: translateY(-1px);
-  box-shadow: 0 6px 20px rgba(255, 107, 107, 0.4);
-  background: linear-gradient(135deg, #ff5252, #d32f2f);
+  
+  .input-wrapper {
+    padding: 4px;
+  }
+  
+  .message-input {
+    padding: 8px 10px;
+    font-size: 0.85rem;
+  }
+  
+  .send-button {
+    width: 32px;
+    height: 32px;
+  }
+  
+  .sidebar {
+    width: 280px;
+  }
 } 

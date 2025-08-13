@@ -1,17 +1,17 @@
 import React, { useState } from 'react';
 import './Qellimet.css';
 import logo from '../img/logo1.png';
-import { FaHome, FaExchangeAlt, FaBullseye, FaRobot, FaCog, FaQuestionCircle, FaEdit, FaTrash, FaPlus, FaLaptop, FaPlane, FaCar, FaHome as FaHouse, FaGraduationCap, FaHeart, FaGift, FaQuestion, FaBars, FaTimes } from 'react-icons/fa';
+import { FaHome, FaExchangeAlt, FaBullseye, FaRobot, FaCog, FaQuestionCircle, FaEdit, FaTrash, FaPlus, FaLaptop, FaPlane, FaCar, FaGraduationCap, FaHeart, FaGift, FaQuestion, FaBars, FaTimes } from 'react-icons/fa';
 
 const kategoriaOptions = [
-  { value: 'Teknologji', label: 'Teknologji', icon: <FaLaptop />, color: '#00b894' },
-  { value: 'Pushime', label: 'Pushime', icon: <FaPlane />, color: '#0984e3' },
-  { value: 'Transport', label: 'Transport', icon: <FaCar />, color: '#e17055' },
-  { value: 'Shtëpi', label: 'Shtëpi', icon: <FaHouse />, color: '#6c5ce7' },
-  { value: 'Edukim', label: 'Edukim', icon: <FaGraduationCap />, color: '#fd79a8' },
-  { value: 'Shëndetësi', label: 'Shëndetësi', icon: <FaHeart />, color: '#e84393' },
-  { value: 'Dhuratë', label: 'Dhuratë', icon: <FaGift />, color: '#fdcb6e' },
-  { value: 'Të tjera', label: 'Të tjera', icon: <FaQuestion />, color: '#636e72' },
+  { value: 'Teknologji', label: 'Teknologji', icon: 'FaLaptop', color: '#00b894' },
+  { value: 'Pushime', label: 'Pushime', icon: 'FaPlane', color: '#0984e3' },
+  { value: 'Transport', label: 'Transport', icon: 'FaCar', color: '#e17055' },
+  { value: 'Shtëpi', label: 'Shtëpi', icon: 'FaHome', color: '#6c5ce7' },
+  { value: 'Edukim', label: 'Edukim', icon: 'FaGraduationCap', color: '#fd79a8' },
+  { value: 'Shëndetësi', label: 'Shëndetësi', icon: 'FaHeart', color: '#e84393' },
+  { value: 'Dhuratë', label: 'Dhuratë', icon: 'FaGift', color: '#fdcb6e' },
+  { value: 'Të tjera', label: 'Të tjera', icon: 'FaQuestion', color: '#636e72' },
 ];
 
 const qellimetShembull = [
@@ -23,8 +23,7 @@ const qellimetShembull = [
     kategoria: 'Teknologji',
     dataFillimit: '2025-01-01',
     dataPerfundimit: '2025-06-30',
-    pershkrim: 'Laptop për punë dhe studime',
-    ikona: <FaLaptop />
+    pershkrim: 'Laptop për punë dhe studime'
   },
   { 
     id: 2, 
@@ -34,8 +33,7 @@ const qellimetShembull = [
     kategoria: 'Pushime',
     dataFillimit: '2025-02-01',
     dataPerfundimit: '2025-08-31',
-    pershkrim: 'Pushime 7 ditë në Santorini',
-    ikona: <FaPlane />
+    pershkrim: 'Pushime 7 ditë në Santorini'
   },
   { 
     id: 3, 
@@ -45,14 +43,26 @@ const qellimetShembull = [
     kategoria: 'Transport',
     dataFillimit: '2025-01-15',
     dataPerfundimit: '2025-12-31',
-    pershkrim: 'Makina e përditshme',
-    ikona: <FaCar />
+    pershkrim: 'Makina e përditshme'
   },
 ];
 
 function getIconForCategory(cat) {
   const found = kategoriaOptions.find(k => k.value === cat);
-  return found ? found.icon : <FaQuestion />;
+  if (!found) return <FaQuestion />;
+  
+  const iconMap = {
+    'FaLaptop': <FaLaptop />,
+    'FaPlane': <FaPlane />,
+    'FaCar': <FaCar />,
+    'FaHome': <FaHome />,
+    'FaGraduationCap': <FaGraduationCap />,
+    'FaHeart': <FaHeart />,
+    'FaGift': <FaGift />,
+    'FaQuestion': <FaQuestion />
+  };
+  
+  return iconMap[found.icon] || <FaQuestion />;
 }
 
 function getColorForCategory(cat) {
@@ -80,7 +90,14 @@ const Qellimet = ({ onNavigate, currentPage }) => {
   const [showModal, setShowModal] = useState(false);
   const [editId, setEditId] = useState(null);
   const [sidebarOpen, setSidebarOpen] = useState(false);
+  const [showLogoutModal, setShowLogoutModal] = useState(false);
   const [qellimet, setQellimet] = useState(qellimetShembull);
+
+  // Funksioni për të konfirmuar daljen
+  const confirmLogout = () => {
+    window.location.href = '/';
+    setShowLogoutModal(false);
+  };
   const [form, setForm] = useState({ 
     emri: '', 
     shumaKursyer: '', 
@@ -89,12 +106,6 @@ const Qellimet = ({ onNavigate, currentPage }) => {
     dataFillimit: '', 
     dataPerfundimit: '', 
     pershkrim: '' 
-  });
-  const [showIncomeModal, setShowIncomeModal] = useState(false);
-  const [incomeForm, setIncomeForm] = useState({
-    monthlyIncome: '',
-    additionalIncome: '',
-    description: ''
   });
 
   // Statistika
@@ -112,8 +123,7 @@ const Qellimet = ({ onNavigate, currentPage }) => {
     const newQellim = {
       ...form,
       shumaKursyer: Number(form.shumaKursyer) || 0,
-      shumaSynuar: Number(form.shumaSynuar),
-      ikona: getIconForCategory(form.kategoria)
+      shumaSynuar: Number(form.shumaSynuar)
     };
 
     if (editId) {
@@ -185,9 +195,9 @@ const Qellimet = ({ onNavigate, currentPage }) => {
           <button className={`sidebar-link${currentPage === 'qellimet' ? ' active' : ''}`} onClick={() => {onNavigate('qellimet'); setSidebarOpen(false);}}><FaBullseye /> <span>Qëllimet</span></button>
           <button className={`sidebar-link${currentPage === 'aichat' ? ' active' : ''}`} onClick={() => {onNavigate('aichat'); setSidebarOpen(false);}}><FaRobot className="bot-icon" /> <span>AIChat</span></button>
           <button className={`sidebar-link${currentPage === 'settings' ? ' active' : ''}`} onClick={() => {onNavigate('settings'); setSidebarOpen(false);}}><FaCog /> <span>Settings</span></button>
-          <button className={`sidebar-link${currentPage === 'help' ? ' active' : ''}`} onClick={() => {onNavigate('help'); setSidebarOpen(false);}}><FaQuestionCircle /> <span>Help</span></button>
+                      <button className={`sidebar-link${currentPage === 'help' ? ' active' : ''}`} onClick={() => {onNavigate('help'); setSidebarOpen(false);}}><FaQuestionCircle /> <span>Ndihmë</span></button>
         </nav>
-        <button className="logout-btn" onClick={() => window.location.href = '/'}>Dil</button>
+        <button className="logout-btn" onClick={() => setShowLogoutModal(true)}>Dil</button>
       </aside>
 
       {/* Main Content */}
@@ -254,7 +264,7 @@ const Qellimet = ({ onNavigate, currentPage }) => {
                 <div key={q.id} className={`qellim-card ${isCompleted ? 'completed' : ''} ${isOverdue ? 'overdue' : ''}`}>
                   <div className="qellim-header">
                     <div className="qellim-icon" style={{ color: getColorForCategory(q.kategoria) }}>
-                      {q.ikona}
+                      {getIconForCategory(q.kategoria)}
                     </div>
                     <div className="qellim-title">
                       <h3>{q.emri}</h3>
@@ -405,6 +415,39 @@ const Qellimet = ({ onNavigate, currentPage }) => {
                   </button>
                 </div>
               </form>
+            </div>
+          </div>
+        )}
+
+        {/* Modal për konfirmimin e daljes */}
+        {showLogoutModal && (
+          <div className="modal-bg">
+            <div className="modal-content">
+              <div className="modal-header">
+                <h3>KONFIRMO DALJEN</h3>
+                <button className="modal-close-btn" onClick={() => setShowLogoutModal(false)}>
+                  <FaTimes />
+                </button>
+              </div>
+              <div className="modal-body">
+                <p>A jeni të sigurt që dëshironi të dilni nga llogaria?</p>
+              </div>
+              <div className="modal-actions">
+                <button 
+                  type="button" 
+                  className="cancel-btn" 
+                  onClick={() => setShowLogoutModal(false)}
+                >
+                  ANULO
+                </button>
+                <button 
+                  type="button" 
+                  className="confirm-btn" 
+                  onClick={confirmLogout}
+                >
+                  PO, DIL
+                </button>
+              </div>
             </div>
           </div>
         )}
