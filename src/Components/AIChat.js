@@ -8,7 +8,14 @@ const AIChat = ({ currentPage, onNavigate }) => {
   const [inputValue, setInputValue] = useState('');
   const [isLoading, setIsLoading] = useState(false);
   const [sidebarOpen, setSidebarOpen] = useState(false);
+  const [showLogoutModal, setShowLogoutModal] = useState(false);
   const messagesEndRef = useRef(null);
+
+  // Funksioni për të konfirmuar daljen
+  const confirmLogout = () => {
+    window.location.href = '/';
+    setShowLogoutModal(false);
+  };
 
 
 
@@ -130,9 +137,9 @@ const AIChat = ({ currentPage, onNavigate }) => {
           <button type="button" onClick={e => {e.preventDefault(); onNavigate('qellimet'); setSidebarOpen(false);}}><FaBullseye /> <span>Qëllimet</span></button>
           <button type="button" className="active" onClick={e => {e.preventDefault(); onNavigate('aichat'); setSidebarOpen(false);}}><FaRobot className="bot-icon" /> <span>AIChat</span></button>
           <button type="button" onClick={e => {e.preventDefault(); onNavigate('settings'); setSidebarOpen(false);}}><FaCog /> <span>Settings</span></button>
-          <button type="button" onClick={e => {e.preventDefault(); onNavigate('help'); setSidebarOpen(false);}}><FaQuestionCircle /> <span>Help</span></button>
+          <button type="button" onClick={e => {e.preventDefault(); onNavigate('help'); setSidebarOpen(false);}}><FaQuestionCircle /> <span>Ndihmë</span></button>
         </nav>
-        <button className="logout-btn" onClick={() => window.location.href = '/'}>Dil</button>
+        <button className="logout-btn" onClick={() => setShowLogoutModal(true)}>Dil</button>
       </aside>
 
       {/* Main Content */}
@@ -239,6 +246,39 @@ const AIChat = ({ currentPage, onNavigate }) => {
             </div>
           </div>
         </div>
+
+        {/* Modal për konfirmimin e daljes */}
+        {showLogoutModal && (
+          <div className="modal-bg">
+            <div className="modal-content">
+              <div className="modal-header">
+                <h3>KONFIRMO DALJEN</h3>
+                <button className="modal-close-btn" onClick={() => setShowLogoutModal(false)}>
+                  <FaTimes />
+                </button>
+              </div>
+              <div className="modal-body">
+                <p>A jeni të sigurt që dëshironi të dilni nga llogaria?</p>
+              </div>
+              <div className="modal-actions">
+                <button 
+                  type="button" 
+                  className="cancel-btn" 
+                  onClick={() => setShowLogoutModal(false)}
+                >
+                  ANULO
+                </button>
+                <button 
+                  type="button" 
+                  className="confirm-btn" 
+                  onClick={confirmLogout}
+                >
+                  PO, DIL
+                </button>
+              </div>
+            </div>
+          </div>
+        )}
       </main>
     </div>
   );

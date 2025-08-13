@@ -58,6 +58,9 @@ const Transaksionet = ({ onNavigate, currentPage, transaksionet, setTransaksione
     metoda: '' 
   });
 
+  // State për modal-in e konfirmimit të daljes
+  const [showLogoutModal, setShowLogoutModal] = useState(false);
+
   // Llogaritja e statistikave të transaksioneve
   // Totali i të ardhurave - mbledh të gjitha transaksionet me lloj "Të ardhura"
   const totaliTeArdhura = transaksionet.filter(t => t.lloji === 'Të ardhura').reduce((a, b) => a + Number(b.shuma), 0);
@@ -96,6 +99,12 @@ const Transaksionet = ({ onNavigate, currentPage, transaksionet, setTransaksione
   const totalPie = Math.abs(totaliTeArdhura) + Math.abs(totaliShpenzime);
   const percTeArdhura = totalPie ? Math.round((Math.abs(totaliTeArdhura) / totalPie) * 100) : 0;
   const percShpenzime = totalPie ? 100 - percTeArdhura : 0;
+
+  // Funksioni për të konfirmuar daljen
+  const confirmLogout = () => {
+    setShowLogoutModal(false);
+    window.location.href = '/';
+  };
 
   // Funksioni për të shtuar ose edituar transaksion
   function handleSubmit(e) {
@@ -173,11 +182,11 @@ const Transaksionet = ({ onNavigate, currentPage, transaksionet, setTransaksione
           <button className={`sidebar-link${currentPage === 'qellimet' ? ' active' : ''}`} onClick={() => {onNavigate('qellimet'); setSidebarOpen(false);}}><FaBullseye /> <span>Qëllimet</span></button>
           <button className={`sidebar-link${currentPage === 'aichat' ? ' active' : ''}`} onClick={() => {onNavigate('aichat'); setSidebarOpen(false);}}><FaRobot className="bot-icon" /> <span>AIChat</span></button>
           <button className={`sidebar-link${currentPage === 'settings' ? ' active' : ''}`} onClick={() => {onNavigate('settings'); setSidebarOpen(false);}}><FaCog /> <span>Settings</span></button>
-          <button className={`sidebar-link${currentPage === 'help' ? ' active' : ''}`} onClick={() => {onNavigate('help'); setSidebarOpen(false);}}><FaQuestionCircle /> <span>Help</span></button>
+                      <button className={`sidebar-link${currentPage === 'help' ? ' active' : ''}`} onClick={() => {onNavigate('help'); setSidebarOpen(false);}}><FaQuestionCircle /> <span>Ndihmë</span></button>
         </nav>
         
         {/* Butoni për të dalë nga aplikacioni */}
-        <button className="logout-btn" onClick={() => window.location.href = '/'}>Dil</button>
+                 <button className="logout-btn" onClick={() => setShowLogoutModal(true)}>Dil</button>
       </aside>
 
       {/* Përmbajtja kryesore e faqes */}
@@ -332,6 +341,39 @@ const Transaksionet = ({ onNavigate, currentPage, transaksionet, setTransaksione
                   <button type="submit" className="add-btn">{editId ? 'Ruaj' : 'Shto'}</button>
                 </div>
               </form>
+            </div>
+          </div>
+        )}
+
+        {/* Modal për konfirmimin e daljes */}
+        {showLogoutModal && (
+          <div className="modal-bg">
+            <div className="modal-content">
+              <div className="modal-header">
+                <h3>KONFIRMO DALJEN</h3>
+                <button className="modal-close-btn" onClick={() => setShowLogoutModal(false)}>
+                  <FaTimes />
+                </button>
+              </div>
+              <div className="modal-body">
+                <p>A jeni të sigurt që dëshironi të dilni nga llogaria?</p>
+              </div>
+              <div className="modal-actions">
+                <button 
+                  type="button" 
+                  className="cancel-btn" 
+                  onClick={() => setShowLogoutModal(false)}
+                >
+                  ANULO
+                </button>
+                <button 
+                  type="button" 
+                  className="confirm-btn" 
+                  onClick={confirmLogout}
+                >
+                  PO, DIL
+                </button>
+              </div>
             </div>
           </div>
         )}

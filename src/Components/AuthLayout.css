@@ -442,7 +442,7 @@ width: 100%;
 }
 
 /* Input-et */
-.login-input, .birthdate-select {
+.login-input, .birthdate-select, .password-input {
   font-size: 0.95rem;
   padding: 10px 12px 10px 40px;
   height: 40px;
@@ -506,7 +506,7 @@ button[type="submit"] {
 
 /* Password input container */
 .password-input-container {
-  margin-bottom: 8px;
+  margin-bottom: 12px;
 }
 
 /* Toggle visibility button */
@@ -532,7 +532,7 @@ button[type="submit"] {
   font-size: 0.9rem;
 }
 
-.login-input, .birthdate-select {
+.login-input, .birthdate-select, .password-input {
   font-size: 0.9rem;
   padding: 8px 10px 8px 36px;
   height: 36px;
@@ -571,7 +571,7 @@ button[type="submit"] {
   font-size: 0.85rem;
 }
 
-.login-input, .birthdate-select {
+.login-input, .birthdate-select, .password-input {
   font-size: 0.85rem;
   padding: 6px 8px 6px 32px;
   height: 32px;

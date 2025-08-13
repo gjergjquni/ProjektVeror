@@ -10,6 +10,8 @@ import HomeDashboard from './Components/HomeDashboard';
 import Transaksionet from './Components/Transaksionet';
 import Qellimet from './Components/Qellimet';
 import AIChat from './Components/AIChat';
+import Settings from './Components/Settings';
+import Help from './Components/Help';
 
 // Të dhënat fillestare të transaksioneve - këto janë transaksione shembull që shfaqen kur aplikacioni hapet
 const initialTransaksionet = [
@@ -64,10 +66,28 @@ function App() {
     />;
   }
 
-  // Kontrolli i faqes së AI Chat
-  // Nëse përdoruesi është loguar dhe ka zgjedhur faqen e AI Chat
+  // Kontrolli i faqes së AIChat
+  // Nëse përdoruesi është loguar dhe ka zgjedhur faqen e AIChat
   if (page === 'aichat' && loggedInUser) {
     return <AIChat
+      currentPage={page}
+      onNavigate={setPage}
+    />;
+  }
+
+  // Kontrolli i faqes së Settings
+  // Nëse përdoruesi është loguar dhe ka zgjedhur faqen e Settings
+  if (page === 'settings' && loggedInUser) {
+    return <Settings
+      currentPage={page}
+      onNavigate={setPage}
+    />;
+  }
+
+  // Kontrolli i faqes së Help
+  // Nëse përdoruesi është loguar dhe ka zgjedhur faqen e Help
+  if (page === 'help' && loggedInUser) {
+    return <Help
       currentPage={page}
       onNavigate={setPage}
     />;
@@ -79,7 +99,6 @@ function App() {
     return <HomeDashboard
       onGoToTransaksionet={() => setPage('transaksionet')}
       onNavigate={setPage}
-      currentPage={page}
       transaksionet={transaksionet}
       setTransaksionet={setTransaksionet}
       totalIncome={totalIncome}

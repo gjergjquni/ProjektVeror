@@ -9,13 +9,7 @@ import { FaHome, FaExchangeAlt, FaBullseye, FaRobot, FaCog, FaQuestionCircle, Fa
 // Emri i përdoruesit - për momentin i vendosur statikisht
 const userName = 'Ledion';
 
-// Kategoritë statike për pie chart - këto janë vlera shembull
-// const categories = [
-//   { name: 'Ushqime', value: 320, color: '#00b894' },
-//   { name: 'Transport', value: 180, color: '#0984e3' },
-//   { name: 'Argëtim', value: 120, color: '#e17055' },
-//   { name: 'Të tjera', value: 200, color: '#636e72' },
-// ];
+
 
 // Njoftimet e sistemit - këto janë njoftime shembull
 const notifications = [
@@ -46,11 +40,11 @@ export default function HomeDashboard({
     additionalIncome: '', // Të ardhurat shtesë
     description: '' // Përshkrimi
   });
+
+  // State për modal-in e konfirmimit të daljes
+  const [showLogoutModal, setShowLogoutModal] = useState(false);
   
   // Llogaritja e statistikave nga transaksionet
-  // Totali i të ardhurave - mbledh të gjitha transaksionet me lloj "Të ardhura"
-  // const totaliTeArdhura = transaksionet.filter(t => t.lloji === 'Të ardhura').reduce((a, b) => a + Number(b.shuma), 0);
-  
   // Totali i shpenzimeve - mbledh të gjitha transaksionet me lloj "Shpenzim"
   const totaliShpenzime = transaksionet.filter(t => t.lloji === 'Shpenzim').reduce((a, b) => a + Number(b.shuma), 0);
   
@@ -64,8 +58,7 @@ export default function HomeDashboard({
   const lastMonthExpenses = 710;
   const expenseChange = Math.round(((expenses - lastMonthExpenses) / lastMonthExpenses) * 100);
   
-  // Totali për pie chart - mbledh të gjitha kategoritë statike
-  // const total = categories.reduce((sum, c) => sum + c.value, 0);
+
 
   // Funksioni për të llogaritur shpenzimet sipas kategorive nga transaksionet aktuale
   const calculateExpensesByCategory = () => {
@@ -101,6 +94,12 @@ export default function HomeDashboard({
   
   // Totali dinamik për pie chart
   const dynamicTotal = dynamicCategories.reduce((sum, c) => sum + c.value, 0);
+
+  // Funksioni për të konfirmuar daljen
+  const confirmLogout = () => {
+    setShowLogoutModal(false);
+    window.location.href = '/';
+  };
 
   // Funksioni për të shtuar të ardhura të reja
   const handleIncomeSubmit = (e) => {
@@ -222,9 +221,9 @@ export default function HomeDashboard({
           <button type="button" onClick={e => {e.preventDefault(); onNavigate('qellimet'); setSidebarOpen(false);}}><FaBullseye /> <span>Qëllimet</span></button>
           <button type="button" onClick={e => {e.preventDefault(); onNavigate('aichat'); setSidebarOpen(false);}}><FaRobot className="bot-icon" /> <span>AIChat</span></button>
           <button type="button" onClick={e => {e.preventDefault(); onNavigate('settings'); setSidebarOpen(false);}}><FaCog /> <span>Settings</span></button>
-          <button type="button" onClick={e => {e.preventDefault(); onNavigate('help'); setSidebarOpen(false);}}><FaQuestionCircle /> <span>Help</span></button>
+          <button type="button" onClick={e => {e.preventDefault(); onNavigate('help'); setSidebarOpen(false);}}><FaQuestionCircle /> <span>Ndihmë</span></button>
         </nav>
-        <button className="logout-btn" onClick={() => window.location.href = '/'}>Dil</button>
+                 <button className="logout-btn" onClick={() => setShowLogoutModal(true)}>Dil</button>
       </aside>
       
       {/* Main Content */}
@@ -321,35 +320,7 @@ export default function HomeDashboard({
                   </div>
                 )}
               </div>
-              <div style={{
-                marginTop: '20px',
-                textAlign: 'center'
-              }}>
-                <button 
-                  onClick={() => onNavigate('transaksionet')}
-                  style={{
-                    background: 'linear-gradient(135deg, #00b894, #1de9b6)',
-                    border: 'none',
-                    color: 'white',
-                    padding: '10px 20px',
-                    borderRadius: '12px',
-                    fontSize: '0.9rem',
-                    fontWeight: '600',
-                    cursor: 'pointer',
-                    transition: 'all 0.3s ease'
-                  }}
-                  onMouseOver={(e) => {
-                    e.target.style.transform = 'translateY(-2px)';
-                    e.target.style.boxShadow = '0 8px 20px rgba(0, 185, 148, 0.3)';
-                  }}
-                  onMouseOut={(e) => {
-                    e.target.style.transform = 'translateY(0)';
-                    e.target.style.boxShadow = 'none';
-                  }}
-                >
-                  Shiko të gjitha transaksionet
-                </button>
-              </div>
+
             </div>
             <div className="compare-notify-section">
               <div className={`compare-card ${expenseChange > 0 ? 'negative' : 'positive'}`}>
@@ -546,6 +517,39 @@ export default function HomeDashboard({
                 </button>
               </div>
             </form>
+          </div>
+        </div>
+      )}
+
+      {/* Modal për konfirmimin e daljes */}
+      {showLogoutModal && (
+        <div className="modal-bg">
+          <div className="modal-content">
+            <div className="modal-header">
+              <h3>KONFIRMO DALJEN</h3>
+              <button className="modal-close-btn" onClick={() => setShowLogoutModal(false)}>
+                <FaTimes />
+              </button>
+            </div>
+            <div className="modal-body">
+              <p>A jeni të sigurt që dëshironi të dilni nga llogaria?</p>
+            </div>
+            <div className="modal-actions">
+              <button 
+                type="button" 
+                className="cancel-btn" 
+                onClick={() => setShowLogoutModal(false)}
+              >
+                ANULO
+              </button>
+              <button 
+                type="button" 
+                className="confirm-btn" 
+                onClick={confirmLogout}
+              >
+                PO, DIL
+              </button>
+            </div>
           </div>
         </div>
       )}

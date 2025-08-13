@@ -78,7 +78,7 @@ export default function Dashboard() {
           <a href="/qellimet"><FaBullseye /> <span>Qëllimet</span></a>
           <a href="/aichat"><FaRobot className="bot-icon" /> <span>AIChat</span></a>
           <a href="/settings"><FaCog /> <span>Settings</span></a>
-          <a href="/help"><FaQuestionCircle /> <span>Help</span></a>
+          <a href="/help"><FaQuestionCircle /> <span>Ndihmë</span></a>
         </nav>
       </aside>
       {/* Main Content */}

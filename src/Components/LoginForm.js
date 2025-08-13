@@ -1,7 +1,5 @@
 // Importimi i librarive të nevojshme nga React
 import React, { useState } from 'react';
-// Importimi i komponentit për input-in e fjalëkalimit
-import PasswordInput from './PasswordInput';
 // Importimi i stileve CSS
 import './AuthLayout.css';
 // Importimi i ikonës së email-it
@@ -55,14 +53,26 @@ function LoginForm({ onSwitch, onForgotPassword, onLogin }) {
       </div>
       
       {/* Kontenieri për input-in e fjalëkalimit */}
-      <div style={{marginBottom: 7}}>
-        {/* Komponenti i personalizuar për fjalëkalimin */}
-        <PasswordInput
+      <div style={{position: 'relative', marginBottom: 12}}>
+        {/* Ikona e fjalëkalimit brenda input-it */}
+        <span className="input-icon" style={{left: 14, top: '40%', position: 'absolute', transform: 'translateY(-50%)', display: 'flex', alignItems: 'center', height: 44}}>
+          {/* Lock SVG */}
+          <svg width={22} height={22} viewBox="0 0 24 24" fill="none" style={{filter: 'brightness(0) invert(1)'}}>
+            <path d="M17 11V7a5 5 0 10-10 0v4" stroke="#00eaff" strokeWidth="1.5"/>
+            <rect x="5" y="11" width="14" height="9" rx="2.5" stroke="#00eaff" strokeWidth="1.5"/>
+            <circle cx="12" cy="15.5" r="1.5" fill="#00eaff"/>
+          </svg>
+        </span>
+        
+        {/* Input-i për fjalëkalimin */}
+        <input
+          className="login-input"
+          type="password"
+          placeholder="Fjalëkalimi"
           value={password}
           onChange={e => setPassword(e.target.value)} // Përditëson state-in kur ndryshon vlera
-          placeholder="Fjalëkalimi"
-          name="password"
           required // Fusha e detyrueshme
+          style={{paddingLeft: 44, height: 44}} // Stilet për të lënë vend për ikonën
         />
       </div>
       

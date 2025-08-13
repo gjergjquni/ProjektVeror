@@ -1,7 +1,5 @@
 // Importimi i librarive të nevojshme nga React
 import React, { useState, useEffect } from 'react';
-// Importimi i komponentit për input-in e fjalëkalimit
-import PasswordInput from './PasswordInput';
 // Importimi i stileve CSS
 import './AuthLayout.css';
 // Importimi i ikonave
@@ -18,7 +16,6 @@ function RegisterForm({ onSwitch }) {
   const [birthYear, setBirthYear] = useState(''); // Viti i lindjes
   const [password, setPassword] = useState(''); // Fjalëkalimi
   const [confirmPassword, setConfirmPassword] = useState(''); // Konfirmimi i fjalëkalimit
-  const [isPasswordValid, setIsPasswordValid] = useState(false); // A është fjalëkalimi i vlefshëm
   const [isMobile, setIsMobile] = useState(false); // A është ekrani mobile
 
   // Hook për të kontrolluar madhësinë e ekranit
@@ -46,12 +43,6 @@ function RegisterForm({ onSwitch }) {
   // Funksioni që thirret kur përdoruesi dërgon formularin
   const handleSubmit = (e) => {
     e.preventDefault(); // Parandalon refresh-in e faqes
-    
-    // Kontrollo nëse fjalëkalimi plotëson kërkesat e sigurisë
-    if (!isPasswordValid) {
-      alert('Fjalëkalimi nuk plotëson kërkesat e sigurisë!');
-      return;
-    }
     
     // Kontrollo nëse fjalëkalimet përputhen
     if (password !== confirmPassword) {
@@ -200,25 +191,64 @@ function RegisterForm({ onSwitch }) {
       </div>
 
       {/* Kontenieri për input-in e fjalëkalimit */}
-      <div style={{marginBottom: isMobile ? 6 : 12}}>
-        <PasswordInput
+      <div style={{position: 'relative', marginBottom: isMobile ? 6 : 12}}>
+        {/* Ikona e fjalëkalimit */}
+        <span className="input-icon" style={{
+          left: isMobile ? 8 : 14, 
+          top: '40%', 
+          position: 'absolute', 
+          transform: 'translateY(-50%)', 
+          display: 'flex', 
+          alignItems: 'center', 
+          height: isMobile ? 36 : 44
+        }}>
+          {/* Lock SVG */}
+          <svg width={isMobile ? 18 : 22} height={isMobile ? 18 : 22} viewBox="0 0 24 24" fill="none" style={{filter: 'brightness(0) invert(1)'}}>
+            <path d="M17 11V7a5 5 0 10-10 0v4" stroke="#00eaff" strokeWidth="1.5"/>
+            <rect x="5" y="11" width="14" height="9" rx="2.5" stroke="#00eaff" strokeWidth="1.5"/>
+            <circle cx="12" cy="15.5" r="1.5" fill="#00eaff"/>
+          </svg>
+        </span>
+        {/* Input-i për fjalëkalimin */}
+        <input
+          className="login-input"
+          type="password"
+          placeholder="Fjalëkalimi"
           value={password}
           onChange={e => setPassword(e.target.value)} // Përditëson state-in
-          placeholder="Fjalëkalimi"
-          name="password"
           required // Fusha e detyrueshme
-          onValidationChange={setIsPasswordValid} // Callback për validimin
+          style={isMobile ? {paddingLeft: 36, height: 36} : {paddingLeft: 44, height: 44}} // Stilet për të lënë vend për ikonën
         />
       </div>
       
       {/* Kontenieri për konfirmimin e fjalëkalimit */}
-      <div style={{marginBottom: isMobile ? 8 : 16}}>
-        <PasswordInput
+      <div style={{position: 'relative', marginBottom: isMobile ? 6 : 12}}>
+        {/* Ikona e fjalëkalimit */}
+        <span className="input-icon" style={{
+          left: isMobile ? 8 : 14, 
+          top: '40%', 
+          position: 'absolute', 
+          transform: 'translateY(-50%)', 
+          display: 'flex', 
+          alignItems: 'center', 
+          height: isMobile ? 36 : 44
+        }}>
+          {/* Lock SVG */}
+          <svg width={isMobile ? 18 : 22} height={isMobile ? 18 : 22} viewBox="0 0 24 24" fill="none" style={{filter: 'brightness(0) invert(1)'}}>
+            <path d="M17 11V7a5 5 0 10-10 0v4" stroke="#00eaff" strokeWidth="1.5"/>
+            <rect x="5" y="11" width="14" height="9" rx="2.5" stroke="#00eaff" strokeWidth="1.5"/>
+            <circle cx="12" cy="15.5" r="1.5" fill="#00eaff"/>
+          </svg>
+        </span>
+        {/* Input-i për konfirmimin e fjalëkalimit */}
+        <input
+          className="login-input"
+          type="password"
+          placeholder="Konfirmo fjalëkalimin"
           value={confirmPassword}
           onChange={e => setConfirmPassword(e.target.value)} // Përditëson state-in
-          placeholder="Konfirmo fjalëkalimin"
-          name="confirm-password"
           required // Fusha e detyrueshme
+          style={isMobile ? {paddingLeft: 36, height: 36} : {paddingLeft: 44, height: 44}} // Stilet për të lënë vend për ikonën
         />
       </div>
       
