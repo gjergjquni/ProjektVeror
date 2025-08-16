@@ -6,24 +6,24 @@ const http = require('http');
 const url = require('url');
 
 // Core modules
-const config = require('./config');
-const ErrorHandler = require('./errorHandler');
-const SessionManager = require('./sessionManager');
-const AuthMiddleware = require('./authMiddleware');
-const DatabaseManager = require('./databaseManager');
-const RateLimiter = require('./rateLimiter');
+const config = require('./utils/config');
+const ErrorHandler = require('./middleware/errorHandler');
+const SessionManager = require('./services/sessionManager');
+const AuthMiddleware = require('./middleware/authMiddleware');
+const DatabaseManager = require('./services/databaseManager');
+const RateLimiter = require('./middleware/rateLimiter');
 
 // Route handlers
-const authRoutes = require('./authRoutes');
-const userRoutes = require('./userRoutes');
-const transactionRoutes = require('./transactionRoutes');
-const goalRoutes = require('./goalRoutes');
-const profileRoutes = require('./profileRoutes');
-const settingsRoutes = require('./settingsRoutes');
-const helpRoutes = require('./helpRoutes');
-const aiChatRoutes = require('./aiChatRoutes');
-const dashboardRoutes = require('./dashboardRoutes');
-const homeDashboardRoutes = require('./homeDashboardRoutes');
+const authRoutes = require('./routes/authRoutes');
+const userRoutes = require('./routes/userRoutes');
+const transactionRoutes = require('./routes/transactionRoutes');
+const goalRoutes = require('./routes/goalRoutes');
+const profileRoutes = require('./routes/profileRoutes');
+const settingsRoutes = require('./routes/settingsRoutes');
+const helpRoutes = require('./routes/helpRoutes');
+const aiChatRoutes = require('./routes/aiChatRoutes');
+const dashboardRoutes = require('./routes/dashboardRoutes');
+const homeDashboardRoutes = require('./routes/homeDashboardRoutes');
 
 class EliotiServer {
     constructor() {

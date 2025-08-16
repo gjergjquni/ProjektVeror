@@ -4,7 +4,7 @@
  */
 
 const crypto = require('crypto');
-const config = require('./config');
+const config = require('../utils/config');
 
 class SessionManager {
     constructor() {

@@ -1,7 +1,7 @@
 // profileRoutes.js
 
-const Validators = require('./validators');
-const ErrorHandler = require('./errorHandler');
+const Validators = require('../utils/validators');
+const ErrorHandler = require('../middleware/errorHandler');
 
 class ProfileRoutes {
     async handle(req, res, context) {

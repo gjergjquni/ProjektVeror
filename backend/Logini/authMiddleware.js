@@ -4,7 +4,7 @@
  */
 
 const ErrorHandler = require('./errorHandler');
-const config = require('./config');
+const config = require('../utils/config');
 
 class AuthMiddleware {
     constructor(sessionManager) {

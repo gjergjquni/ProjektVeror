@@ -17,7 +17,7 @@ const AuthMiddleware = require('./authMiddleware');
 const Validators = require('./validators');
 const ErrorHandler = require('./errorHandler');
 const EmailService = require('./emailService');
-const config = require('./config');
+const config = require('../utils/config');
 
 // Create an instance of an Express application
 const app = express();

@@ -1,7 +1,7 @@
 // backend/aiChatRoutes.js
 
-const Validators = require('./validators');
-const ErrorHandler = require('./errorHandler');
+const Validators = require('../utils/validators');
+const ErrorHandler = require('../middleware/errorHandler');
 
 class AIChatRoutes {
     constructor() {

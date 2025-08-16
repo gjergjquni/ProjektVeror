@@ -5,7 +5,7 @@
  */
 
 const crypto = require('crypto');
-const config = require('./config');
+const config = require('../utils/config');
 const jwt = require('jsonwebtoken'); // Use the standard library
 
 class SessionManager {

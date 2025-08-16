@@ -1,7 +1,7 @@
 // backend/GoalRoutes.js
 
-const Validators = require('./validators');
-const ErrorHandler = require('./errorHandler');
+const Validators = require('../utils/validators');
+const ErrorHandler = require('../middleware/errorHandler');
 
 class GoalRoutes {
     async handle(req, res, context) {

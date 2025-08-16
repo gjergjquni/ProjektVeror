@@ -2,7 +2,7 @@
 
 const mysql = require('mysql2/promise');
 const EventEmitter = require('events');
-const config = require('./config');
+const config = require('../utils/config');
 
 class DatabaseManager extends EventEmitter {
     constructor() {

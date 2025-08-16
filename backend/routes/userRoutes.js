@@ -3,8 +3,8 @@
  * Handles user profile management and user-related operations
  */
 
-const Validators = require('./validators');
-const ErrorHandler = require('./errorHandler');
+const Validators = require('../utils/validators');
+const ErrorHandler = require('../middleware/errorHandler');
 
 class UserRoutes {
     async handle(req, res, context) {

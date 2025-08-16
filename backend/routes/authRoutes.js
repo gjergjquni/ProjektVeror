@@ -1,9 +1,9 @@
 // backend/authRoutes.js
 
 const bcrypt = require('bcrypt');
-const Validators = require('./validators');
-const ErrorHandler = require('./errorHandler');
-const config = require('./config');
+const Validators = require('../utils/validators');
+const ErrorHandler = require('../middleware/errorHandler');
+const config = require('../utils/config');
 
 class AuthRoutes {
     async handle(req, res, context) {
