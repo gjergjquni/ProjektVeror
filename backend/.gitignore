@@ -1,0 +1,6 @@
+# Environment variables - KEEP THESE SECRET!
+.env
+
+# Dependencies - These can be reinstalled with 'npm install'
+# and should never be in the repository.
+/node_modules
