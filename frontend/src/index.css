@@ -1,0 +1,152 @@
+/* Global CSS Variables for Theme System */
+:root {
+    --bg-primary: #1a1b2e;
+    --bg-secondary: #23243a;
+    --bg-tertiary: #2d2f45;
+    --text-primary: #eaf6f7;
+    --text-secondary: #b2bec3;
+    --text-accent: #00b894;
+    --border-color: rgba(255, 255, 255, 0.08);
+    --shadow-color: rgba(0, 0, 0, 0.2);
+    --card-bg: #23243a;
+    --hover-bg: #2d2f45;
+    --sidebar-bg: #1a1b2e;
+    --sidebar-hover: #23243a;
+    --sidebar-text: #eaf6f7;
+    --sidebar-active: #00b894;
+    --sidebar-active-bg: rgba(0, 184, 148, 0.1);
+  }
+  
+  /* Global Theme Application */
+  body {
+    background-color: var(--bg-primary);
+    color: var(--text-primary);
+    margin: 0;
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
+      'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
+      sans-serif;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+  
+  code {
+    font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
+      monospace;
+  }
+  
+  /* Dashboard Container - Global Theme */
+  .dashboard-container {
+    background-color: var(--bg-primary);
+    color: var(--text-primary);
+    min-height: 100vh;
+    display: flex;
+  }
+  
+  /* Sidebar - Global Theme */
+  .sidebar {
+    background-color: var(--sidebar-bg);
+    color: var(--sidebar-text);
+    border-right: 1px solid var(--border-color);
+  }
+  
+  .sidebar-menu button {
+    color: var(--sidebar-text);
+    background-color: transparent;
+  }
+  
+  .sidebar-menu button:hover {
+    background-color: var(--sidebar-hover);
+  }
+  
+  .sidebar-menu button.active {
+    background-color: var(--sidebar-active-bg);
+    color: var(--sidebar-active);
+  }
+  
+  /* Main Content - Global Theme */
+  .dashboard-main {
+    background-color: var(--bg-primary);
+    color: var(--text-primary);
+  }
+  
+  .main-content-center {
+    background-color: var(--bg-primary);
+  }
+  
+  /* Cards and Sections - Global Theme */
+  .balance-card,
+  .income-card,
+  .expense-card,
+  .transaction-item,
+  .income-item,
+  .incomes-section,
+  .recent-transactions-section,
+  .settings-section,
+  .info-card,
+  .notification-item {
+    background-color: var(--card-bg);
+    border-color: var(--border-color);
+    box-shadow: 0 12px 35px var(--shadow-color);
+  }
+  
+  .balance-card:hover,
+  .income-card:hover,
+  .expense-card:hover,
+  .transaction-item:hover,
+  .income-item:hover,
+  .info-card:hover,
+  .notification-item:hover {
+    background-color: var(--hover-bg);
+    box-shadow: 0 16px 40px var(--shadow-color);
+  }
+  
+  /* Text Colors - Global Theme */
+  h1, h2, h3, h4, h5, h6 {
+    color: var(--text-primary);
+  }
+  
+  p, span, label {
+    color: var(--text-secondary);
+  }
+  
+  /* Form Elements - Global Theme */
+  input, select, textarea {
+    background-color: var(--hover-bg);
+    color: var(--text-primary);
+    border-color: var(--border-color);
+  }
+  
+  input:focus, select:focus, textarea:focus {
+    border-color: var(--text-accent);
+  }
+  
+  /* Buttons - Global Theme */
+  button {
+    color: var(--text-primary);
+  }
+  
+  button:hover {
+    background-color: var(--hover-bg);
+  }
+  
+  /* Modal Background - Global Theme */
+  .modal-bg {
+    background-color: rgba(0, 0, 0, 0.8);
+  }
+  
+  .modal-content {
+    background-color: var(--card-bg);
+    border-color: var(--border-color);
+    box-shadow: 0 20px 60px var(--shadow-color);
+  }
+  
+  /* Responsive adjustments for theme system */
+  @media (max-width: 768px) {
+    .sidebar {
+      background-color: var(--sidebar-bg);
+    }
+    
+    .dashboard-main {
+      background-color: var(--bg-primary);
+    }
+  }

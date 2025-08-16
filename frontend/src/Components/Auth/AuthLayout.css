@@ -1,0 +1,603 @@
+.auth-layout {
+  width: 100vw;
+min-height: 100vh;
+  display: flex;
+flex-direction: row;
+  align-items: center;
+  justify-content: center;
+background: #101820;
+  box-sizing: border-box;
+  overflow: hidden;
+gap: 0;
+}
+
+body {
+margin: 0;
+padding: 0;
+box-sizing: border-box;
+  overflow-x: hidden;
+font-family: 'Poppins', 'Roboto', Arial, sans-serif;
+background: #101820;
+}
+
+.auth-left {
+flex: none;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+align-items: center;
+padding: 0 2vw 0 2vw;
+  color: #fff;
+  min-width: 220px;
+box-sizing: border-box;
+margin: 0;
+}
+
+.auth-title {
+  font-size: clamp(2rem, 4vw, 3.3rem);
+  font-weight: 800;
+  margin-bottom: 10px;
+  letter-spacing: 1px;
+  text-shadow: 0 2px 16px rgba(0,0,0,0.18);
+}
+
+.auth-desc {
+  font-size: clamp(1rem, 2vw, 1.35rem);
+  line-height: 1.4;
+  max-width: 420px;
+  color: #e3e3e3;
+  text-shadow: 0 1px 8px rgba(0,0,0,0.13);
+}
+
+.auth-right {
+flex: none;
+  display: flex;
+  flex-direction: column;
+align-items: center;
+  justify-content: center;
+  min-width: 220px;
+padding: 0 2vw;
+  min-height: 100vh;
+box-sizing: border-box;
+background: rgba(18, 24, 30, 0.82);
+margin: 0;
+}
+
+.auth-form-glass {
+background: rgba(18, 24, 30, 0.92);
+border-radius: 18px;
+  box-shadow: 0 8px 32px rgba(0,0,0,0.18);
+  padding: 2.5vh 4vw 2vh 4vw;
+  min-width: 240px;
+  min-height: 180px;
+  width: 100%;
+  max-width: 360px;
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  position: relative;
+  backdrop-filter: blur(6px);
+}
+
+.auth-divider {
+  display: flex;
+  align-items: center;
+  margin: 24px 0 18px 0;
+  color: #bbb;
+  font-size: 1.01rem;
+}
+.auth-divider span {
+  margin: 0 12px;
+  font-weight: 600;
+}
+.auth-divider:before, .auth-divider:after {
+  content: '';
+  flex: 1;
+  height: 1px;
+  background: #2e2e2e;
+  opacity: 0.3;
+}
+
+.auth-socials {
+  display: flex;
+  gap: 18px;
+  justify-content: center;
+  margin-bottom: 6px;
+}
+.auth-social-btn {
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  border: none;
+  background: #23272f;
+  color: #fff;
+  font-size: 1.3rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.10);
+  cursor: pointer;
+  transition: background 0.18s, transform 0.12s;
+}
+.auth-social-btn:hover, .auth-social-btn:focus {
+  background: #43c6ac;
+  color: #fff;
+  transform: scale(1.08);
+}
+
+.login-glass {
+  background: rgba(10, 20, 40, 0.92);
+  border: 2px solid #00eaff;
+  border-radius: 16px;
+  box-shadow: 0 0 24px #00eaff33, 0 2px 24px #000a;
+margin: 0 auto !important;
+align-self: center;
+display: flex;
+flex-direction: column;
+align-items: center;
+justify-content: center;
+  width: 100%;
+  max-width: 480px;
+min-width: 240px;
+  color: #eaffff;
+  font-family: 'Poppins', 'Roboto', sans-serif;
+  box-sizing: border-box;
+padding: clamp(24px, 4vw, 40px) clamp(18px, 3vw, 32px);
+font-size: clamp(1rem, 2vw, 1.18rem);
+}
+
+.login-input {
+  width: 100%;
+padding: 18px 22px 18px 52px;
+margin-bottom: 18px;
+  border: 1.2px solid #00eaff;
+  border-radius: 7px;
+  background: rgba(0,0,0,0.18);
+  color: #eaffff;
+font-size: 1.18rem;
+  outline: none;
+  transition: border 0.2s, box-shadow 0.2s;
+  box-sizing: border-box;
+max-width: 360px;
+min-width: 240px;
+}
+
+button, .form-link {
+  width: 100%;
+  max-width: 100%;
+  box-sizing: border-box;
+}
+
+.toggle-visibility {
+  position: absolute;
+  right: 10px;
+  top: 50%;
+  transform: translateY(-50%);
+  background: none;
+  border: none;
+  padding: 0;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  height: 100%;
+  line-height: 1;
+}
+
+.toggle-visibility svg {
+  width: clamp(16px, 3vw, 22px);
+  height: clamp(16px, 3vw, 22px);
+}
+
+.login-input:focus {
+  border: 2px solid #fff;
+  box-shadow: 0 0 10px #00eaffcc, 0 0 2px #fff;
+  background: rgba(0,0,0,0.32);
+}
+
+.input-icon {
+  position: absolute;
+  left: 14px;
+top: 38%;
+  transform: translateY(-50%);
+  color: #00eaff;
+  font-size: 1.2rem;
+  pointer-events: none;
+}
+
+.birthdate-row {
+display: flex;
+flex-direction: row;
+gap: 10px;
+width: 100%;
+margin-bottom: 0;
+}
+.birthdate-select {
+flex: 1;
+min-width: 0;
+padding: 12px 10px;
+border-radius: 7px;
+border: 1.2px solid #00eaff;
+background: rgba(0,0,0,0.18);
+color: #eaffff;
+font-size: 1.08rem;
+outline: none;
+transition: border 0.2s, box-shadow 0.2s;
+box-sizing: border-box;
+height: 44px;
+}
+.birthdate-select:focus {
+border: 2px solid #fff;
+box-shadow: 0 0 10px #00eaffcc, 0 0 2px #fff;
+background: rgba(0,0,0,0.32);
+}
+
+button[type="submit"] {
+font-size: 1.15rem !important;
+padding: 12px 0 !important;
+border-radius: 12px !important;
+width: 50% !important;
+min-width: 160px;
+}
+
+h2 {
+font-size: clamp(2.2rem, 5vw, 3.2rem) !important;
+margin-bottom: 24px !important;
+}
+
+/* Responsive Breakpoints */
+@media (max-width: 1050px) {
+  .auth-layout {
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+    min-height: 100vh;
+  padding: 0;
+  gap: 12px;
+  }
+  .auth-left, .auth-right {
+    width: 100%;
+    min-width: 0;
+    max-width: 100vw;
+    padding: 0 5vw;
+    margin: 0;
+    align-items: center;
+  justify-content: center;
+}
+.auth-left img, .auth-left .logo {
+  max-width: 200px;
+  margin-bottom: 12px;
+  
+  }
+  .auth-right {
+  min-height: 0;
+  padding-top: 0;
+  background: rgba(18, 24, 30, 0.92);
+  display: flex;
+  flex-direction: column;
+    align-items: center;
+  justify-content: center;
+  }
+  .login-glass {
+  margin: 0 auto !important;
+  align-self: center;
+  max-width: 99vw;
+  min-width: 0;
+}
+.auth-title, .auth-desc {
+    text-align: center;
+  margin-left: auto;
+  margin-right: auto;
+}
+}
+
+@media (max-width: 700px) {
+.auth-left, .auth-right {
+  padding: 0 3vw;
+}
+.auth-form-glass, .login-glass {
+  max-width: 95vw;
+  padding: clamp(10px, 2vw, 18px) clamp(8px, 2vw, 14px);
+}
+.birthdate-row {
+  flex-direction: column;
+  gap: 8px;
+}
+.birthdate-select {
+    width: 100%;
+    min-width: 0;
+  max-width: 100%;
+  font-size: 1.05rem;
+  padding: 14px 16px 14px 44px;
+  height: 48px;
+}
+.auth-title, .auth-desc {
+  font-size: 1rem;
+    text-align: center;
+  }
+  .login-glass {
+  font-size: 1.05rem;
+  padding: clamp(18px, 4vw, 28px) clamp(12px, 3vw, 18px);
+}
+.login-input, .birthdate-select {
+  font-size: 1.05rem;
+  padding: 14px 16px 14px 44px;
+  height: 48px;
+  margin-bottom: 12px;
+}
+h2 {
+  font-size: clamp(1.5rem, 4vw, 2.2rem) !important;
+  margin-bottom: 14px !important;
+}
+button[type="submit"] {
+  font-size: 1rem !important;
+  padding: 10px 0 !important;
+  border-radius: 10px !important;
+  width: 70% !important;
+  min-width: 120px;
+}
+}
+
+@media (max-width: 480px) {
+  .auth-layout {
+    padding: 0;
+  }
+  .auth-left, .auth-right {
+  padding: 0 1vw;
+}
+.auth-form-glass, .login-glass {
+  max-width: 99vw;
+    min-width: 0;
+  padding: clamp(6px, 1vw, 10px) clamp(4px, 1vw, 8px);
+}
+.auth-title, .auth-desc {
+  font-size: 1rem;
+    text-align: center;
+}
+}
+
+@media (max-width: 1100px) {
+.login-glass {
+  max-width: 98vw;
+    min-width: 0;
+}
+.login-input, .birthdate-select, .birthdate-row {
+  max-width: 100%;
+    min-width: 0;
+}
+}
+
+.birthdate-select option {
+text-align: center;
+}
+
+.center-btn {
+    display: block;
+margin: 18px auto 0 auto !important;
+}
+
+.input-icon {
+top: 38%;
+}
+
+.login-glass {
+max-width: 750px !important;
+min-width: 420px;
+width: 100%;
+margin: 0 auto !important;
+align-self: center;
+display: flex;
+flex-direction: column;
+align-items: center;
+justify-content: center;
+box-sizing: border-box;
+}
+.login-input, .birthdate-select {
+width: 100%;
+max-width: 100%;
+min-width: 0;
+box-sizing: border-box;
+font-size: 1.13rem;
+height: 44px;
+margin-left: 0;
+margin-right: 0;
+}
+.birthdate-row {
+width: 100%;
+}
+
+/* Responsive styles për ekrane më të vogla se 425px */
+@media (max-width: 425px) {
+/* Layout-i kryesor */
+.auth-layout {
+  padding: 0;
+  min-height: 100vh;
+  flex-direction: column;
+  gap: 0;
+}
+
+/* Ana e majtë dhe e djathtë */
+.auth-left, .auth-right {
+  padding: 8px;
+  min-width: 100%;
+  width: 100%;
+  min-height: auto;
+}
+
+/* Formulari kryesor */
+.auth-form-glass, .login-glass {
+  max-width: 100vw;
+  min-width: 0;
+  width: 95vw;
+  padding: 16px 12px;
+  margin: 8px auto;
+  border-radius: 12px;
+  font-size: 0.95rem;
+}
+
+/* Titulli dhe përshkrimi */
+.auth-title, .auth-desc {
+  font-size: 0.9rem;
+  text-align: center;
+  margin: 8px 0;
+}
+
+/* Input-et */
+.login-input, .birthdate-select, .password-input {
+  font-size: 0.95rem;
+  padding: 10px 12px 10px 40px;
+  height: 40px;
+  margin-bottom: 8px;
+  border-radius: 8px;
+}
+
+/* Titulli i formularit */
+h2 {
+  font-size: 1.4rem !important;
+  margin-bottom: 12px !important;
+  text-align: center;
+}
+
+/* Butoni kryesor */
+button[type="submit"] {
+  font-size: 0.9rem !important;
+  padding: 8px 0 !important;
+  border-radius: 8px !important;
+  width: 80% !important;
+  min-width: 100px;
+  margin: 8px auto !important;
+}
+
+/* Link-et */
+.form-link {
+  font-size: 0.85rem !important;
+  text-align: center;
+  margin: 8px 0;
+}
+
+/* Rreshti i datës së lindjes */
+.birthdate-row {
+  flex-direction: column;
+  gap: 8px;
+  width: 100%;
+}
+
+.birthdate-select {
+  width: 100%;
+  margin-bottom: 8px;
+}
+
+/* Ikona e input-it */
+.input-icon {
+  left: 8px;
+  top: 35%;
+  height: 36px;
+}
+
+.input-icon img {
+  width: 18px;
+  height: 18px;
+}
+
+/* Label-i për datën e lindjes */
+.birthdate-row + div label {
+  font-size: 0.9rem;
+  margin-bottom: 4px;
+}
+
+/* Password input container */
+.password-input-container {
+  margin-bottom: 12px;
+}
+
+/* Toggle visibility button */
+.toggle-visibility {
+  right: 8px;
+  top: 50%;
+  transform: translateY(-50%);
+  height: 36px;
+  width: 36px;
+}
+
+.toggle-visibility svg {
+  width: 16px;
+  height: 16px;
+}
+}
+
+/* Responsive styles për ekrane më të vogla se 375px */
+@media (max-width: 375px) {
+.auth-form-glass, .login-glass {
+  width: 98vw;
+  padding: 12px 8px;
+  font-size: 0.9rem;
+}
+
+.login-input, .birthdate-select, .password-input {
+  font-size: 0.9rem;
+  padding: 8px 10px 8px 36px;
+  height: 36px;
+}
+
+h2 {
+  font-size: 1.2rem !important;
+}
+
+button[type="submit"] {
+  font-size: 0.85rem !important;
+  padding: 6px 0 !important;
+  width: 85% !important;
+}
+
+.form-link {
+  font-size: 0.8rem !important;
+}
+
+.input-icon {
+  left: 6px;
+  height: 32px;
+}
+
+.input-icon img {
+  width: 16px;
+  height: 16px;
+}
+}
+
+/* Responsive styles për ekrane më të vogla se 320px */
+@media (max-width: 320px) {
+.auth-form-glass, .login-glass {
+  width: 99vw;
+  padding: 8px 6px;
+  font-size: 0.85rem;
+}
+
+.login-input, .birthdate-select, .password-input {
+  font-size: 0.85rem;
+  padding: 6px 8px 6px 32px;
+  height: 32px;
+}
+
+h2 {
+  font-size: 1.1rem !important;
+}
+
+button[type="submit"] {
+  font-size: 0.8rem !important;
+  padding: 5px 0 !important;
+  width: 90% !important;
+}
+
+.form-link {
+  font-size: 0.75rem !important;
+}
+
+.input-icon {
+  left: 4px;
+  height: 28px;
+}
+
+.input-icon img {
+  width: 14px;
+  height: 14px;
+}
+}

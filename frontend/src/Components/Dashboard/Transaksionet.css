@@ -1,0 +1,896 @@
+/* Kontenieri kryesor i faqes së transaksioneve */
+.transaksionet-advanced-container {
+  background: #181a23; /* Ngjyra e sfondit të errët */
+  color: #e6f7f7; /* Ngjyra e tekstit të ndritshëm */
+  padding: 32px 24px; /* Hapësira e brendshme */
+  border-radius: 18px; /* Këndet e rrumbullakosura */
+  max-width: 75vw; /* Gjerësia maksimale 75% e viewport */
+  width: 75vw; /* Gjerësia fikse */
+  margin: 40px auto 32px auto; /* Margjina për të qendërzuar */
+  box-shadow: 0 2px 16px #0002; /* Hije e lehtë */
+  display: flex; /* Layout flexbox */
+  flex-direction: column; /* Elementët vertikalisht */
+  align-items: center; /* Qendërzimi horizontal */
+  min-height: 80vh; /* Lartësia minimale 80% e viewport */
+}
+/* Header-i i faqes së transaksioneve */
+.transaksionet-header-advanced {
+  display: flex; /* Layout flexbox */
+  flex-direction: column; /* Elementët vertikalisht */
+  align-items: center; /* Qendërzimi horizontal */
+  gap: 8px; /* Hapësira mes elementëve */
+  margin-bottom: 12px; /* Margjina e poshtme */
+}
+
+/* Titulli kryesor */
+.transaksionet-header-advanced h2 {
+  font-size: 2.3rem; /* Madhësia e madhe e fontit */
+  color: #eaf6f7; /* Ngjyra e ndritshme */
+  margin: 0; /* Pa margjina */
+  text-align: center; /* Qendërzimi i tekstit */
+}
+
+/* Përshkrimi i faqes */
+.transaksionet-desc {
+  color: #b2dfdb; /* Ngjyra e hollë */
+  font-size: 1.08rem; /* Madhësia mesatare e fontit */
+  margin: 0 0 8px 0; /* Margjina vetëm poshtë */
+  text-align: center; /* Qendërzimi i tekstit */
+}
+/* Kontenieri i butonave të veprimeve */
+.transaksionet-action-buttons {
+  display: flex; /* Layout flexbox */
+  gap: 12px; /* Hapësira mes butonave */
+  margin: 12px 0 0 0; /* Margjina lart */
+  width: 100%; /* Gjerësia e plotë */
+  justify-content: center; /* Qendërzimi i butonave */
+}
+
+/* Butoni për të shtuar transaksion */
+.add-btn {
+  background: #ff8661; /* Ngjyra portokalli */
+  color: #fff; /* Teksti i bardhë */
+  border: none; /* Pa kufi */
+  padding: 7px 16px; /* Hapësira e brendshme */
+  border-radius: 8px; /* Këndet e rrumbullakosura */
+  font-size: 1rem; /* Madhësia e fontit */
+  cursor: pointer; /* Kursor pointer */
+  display: flex; /* Layout flexbox */
+  align-items: center; /* Qendërzimi vertikal */
+  gap: 8px; /* Hapësira mes ikonës dhe tekstit */
+  transition: background 0.2s; /* Animacioni i ngjyrës */
+  max-width: 250px; /* Gjerësia maksimale */
+  min-width: 120px; /* Gjerësia minimale */
+  justify-content: center; /* Qendërzimi horizontal */
+}
+
+/* Efekti hover për butonin e shtimit */
+.add-btn:hover {
+  background: #ff7043; /* Ngjyra më e errët në hover */
+}
+
+/* Butoni për të importuar nga banka */
+.import-btn {
+  background: #1de9b6; /* Ngjyra jeshile */
+  color: #fff; /* Teksti i bardhë */
+  border: none; /* Pa kufi */
+  padding: 7px 16px; /* Hapësira e brendshme */
+  border-radius: 8px; /* Këndet e rrumbullakosura */
+  font-size: 1rem; /* Madhësia e fontit */
+  cursor: pointer; /* Kursor pointer */
+  display: flex; /* Layout flexbox */
+  align-items: center; /* Qendërzimi vertikal */
+  gap: 8px; /* Hapësira mes ikonës dhe tekstit */
+  transition: background 0.2s; /* Animacioni i ngjyrës */
+  max-width: 250px; /* Gjerësia maksimale */
+  min-width: 120px; /* Gjerësia minimale */
+  justify-content: center; /* Qendërzimi horizontal */
+}
+
+/* Efekti hover për butonin e importimit */
+.import-btn:hover {
+  background: #00bfa5; /* Ngjyra më e errët në hover */
+}
+
+/* Balanca & Grafik Pie */
+.transaksionet-balance-chart-row {
+  display: flex;
+  gap: 32px;
+  align-items: center;
+  margin-bottom: 18px;
+  flex-wrap: wrap;
+  justify-content: center;
+  width: 100%;
+}
+.transaksionet-balance-box {
+  background: #23243a;
+  border-radius: 12px;
+  padding: 18px 32px;
+  font-size: 1.15rem;
+  color: #fff;
+  font-weight: 600;
+  min-width: 180px;
+  text-align: center;
+}
+.transaksionet-pie-chart {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  background: none;
+  border-radius: 50%;
+  padding: 0;
+  min-width: 80px;
+  min-height: 80px;
+  box-shadow: none;
+}
+.transaksionet-pie-chart svg {
+  margin-bottom: 2px;
+  width: 60px;
+  height: 60px;
+  display: block;
+  background: none;
+}
+.transaksionet-pie-legend {
+  font-size: 1.08rem;
+  color: #b2dfdb;
+  text-align: center;
+  margin-top: 4px;
+}
+.transaksionet-pie-legend span {
+  margin: 0 4px;
+}
+
+.transaksionet-filters-advanced {
+  display: flex;
+  gap: 10px;
+  margin-bottom: 18px;
+  align-items: center;
+  flex-wrap: wrap;
+  justify-content: center;
+  width: 100%;
+}
+.transaksionet-filters-advanced input,
+.transaksionet-filters-advanced select {
+  background: #23243a;
+  color: #e6f7f7;
+  border: 1px solid #23243a;
+  border-radius: 6px;
+  padding: 8px 12px;
+  font-size: 1rem;
+  min-width: 90px;
+}
+
+.transaksionet-table-advanced-wrap {
+width: 100%;
+margin-bottom: 18px;
+border-radius: 10px;
+background: none;
+overflow-x: auto;
+box-shadow: 0 4px 16px rgba(0, 0, 0, 0.1);
+position: relative;
+}
+
+/* Custom scrollbar for table */
+.transaksionet-table-advanced-wrap::-webkit-scrollbar {
+height: 8px;
+}
+
+.transaksionet-table-advanced-wrap::-webkit-scrollbar-track {
+background: #2d2f45;
+border-radius: 4px;
+}
+
+.transaksionet-table-advanced-wrap::-webkit-scrollbar-thumb {
+background: #ff8661;
+border-radius: 4px;
+}
+
+.transaksionet-table-advanced-wrap::-webkit-scrollbar-thumb:hover {
+background: #ff7043;
+}
+.transaksionet-table-advanced {
+  width: 100%;
+  border-collapse: separate;
+  border-spacing: 8px 14px;
+  background: none;
+}
+.transaksionet-table-advanced thead {
+  background: #23243a;
+}
+.transaksionet-table-advanced th, .transaksionet-table-advanced td {
+  background: #23243a;
+  padding: 16px 18px;
+  border-radius: 10px;
+  text-align: left;
+  font-size: 1rem;
+  min-width: 90px;
+  border: none;
+}
+.transaksionet-table-advanced th {
+  color: #1de9b6;
+  font-weight: 600;
+  text-align: center;
+}
+.transaksionet-table-advanced td {
+  text-align: center;
+}
+.transaksion-row {
+  transition: background 0.18s;
+}
+.transaksion-row:hover {
+  background: #23243a !important;
+  box-shadow: 0 2px 8px #0002;
+}
+.icon-btn {
+  background: none;
+  border: none;
+  color: #1de9b6;
+  font-size: 1.15rem;
+  margin-right: 8px;
+  cursor: pointer;
+  transition: color 0.2s;
+}
+.icon-btn:last-child {
+  color: #ff8661;
+  margin-right: 0;
+}
+.icon-btn:hover {
+  color: #fff;
+}
+
+/* Modal Styles */
+.modal-bg {
+  position: fixed;
+  top: 0; left: 0; right: 0; bottom: 0;
+  background: #000a;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+}
+.modal-content {
+  background: #23243a;
+  padding: 32px 24px;
+  border-radius: 12px;
+  min-width: 340px;
+  color: #e6f7f7;
+  box-shadow: 0 2px 16px #0005;
+  position: relative;
+}
+.modal-content h3 {
+  margin-top: 0;
+  color: #1de9b6;
+  text-align: center;
+}
+.modal-form {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+.cancel-btn {
+  background: #23243a;
+  color: #ff8661;
+  border: 1px solid #ff8661;
+  border-radius: 8px;
+  padding: 8px 18px;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: background 0.2s, color 0.2s;
+}
+.cancel-btn:hover {
+  background: #ff8661;
+  color: #fff;
+}
+
+@media (max-width: 1100px) {
+  .transaksionet-advanced-container {
+    max-width: 99vw;
+    padding: 10px 2vw;
+  }
+  .transaksionet-header-advanced h2 {
+    font-size: 1.5rem;
+  }
+  .transaksionet-balance-box {
+    padding: 10px 10px;
+    font-size: 1rem;
+    min-width: 120px;
+  }
+  .transaksionet-pie-chart svg {
+    width: 60px;
+    height: 60px;
+  }
+  .transaksionet-table-advanced th, .transaksionet-table-advanced td {
+    font-size: 0.95rem;
+    padding: 10px 8px;
+    min-width: 60px;
+  }
+}
+@media (max-width: 700px) {
+  .transaksionet-advanced-container {
+    padding: 4px 0;
+    max-width: 100vw;
+    border-radius: 0;
+  }
+  .transaksionet-header-advanced h2 {
+    font-size: 1.1rem;
+  }
+  .transaksionet-header-advanced, .transaksionet-action-buttons {
+    gap: 4px;
+  }
+  .transaksionet-balance-chart-row {
+    flex-direction: column;
+    gap: 10px;
+    width: 100%;
+  }
+  .transaksionet-balance-box {
+    padding: 8px 4px;
+    font-size: 0.98rem;
+    min-width: 80px;
+  }
+  .transaksionet-pie-chart svg {
+    width: 40px;
+    height: 40px;
+  }
+  .transaksionet-filters-advanced {
+    flex-direction: column;
+    gap: 6px;
+    align-items: stretch;
+  }
+  .transaksionet-table-advanced-wrap {
+    overflow-x: auto;
+  }
+  .modal-content {
+    min-width: 90vw;
+    padding: 12px 4px;
+  }
+  .transaksionet-table-advanced th, .transaksionet-table-advanced td {
+    font-size: 0.92rem;
+    padding: 7px 4px;
+  }
+}
+
+.sidebar-link {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 10px 18px;
+  color: #e6f7f7;
+  background: none;
+  border: none;
+  font-size: 1.08rem;
+  text-decoration: none;
+  cursor: pointer;
+  border-radius: 8px;
+  transition: background 0.2s, color 0.2s;
+}
+.sidebar-link:hover {
+  background: #23243a;
+  color: #1de9b6;
+}
+.sidebar-link.active {
+  background: #1de9b6;
+  color: #181a23;
+  font-weight: 600;
+}
+
+.sidebar {
+  width: 240px;
+  background: #23243a;
+  color: #fff;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 32px 0 24px 0;
+  box-shadow: 2px 0 24px #0002;
+  justify-content: flex-start;
+}
+.sidebar-menu {
+  margin-bottom: 12px;
+}
+.dashboard-main {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+  min-height: 100vh;
+  overflow-y: auto;
+}
+.sidebar-logo img {
+  width: 80px;
+  height: 80px;
+  margin-bottom: 40px;
+  filter: drop-shadow(0 2px 12px #00b89444);
+}
+.logout-btn {
+  background: #ff8661;
+  color: #fff;
+  border: none;
+  padding: 12px 38px;
+  border-radius: 10px;
+  font-size: 1.15rem;
+  font-weight: 600;
+  margin-top: 16px;
+  margin-bottom: 0;
+  cursor: pointer;
+  transition: background 0.2s;
+  align-self: center;
+}
+.logout-btn:hover {
+  background: #ff7043;
+} 
+
+/* Hamburger Menu Button */
+.hamburger-menu-btn {
+display: none;
+position: fixed;
+top: 20px;
+left: 20px;
+z-index: 1001;
+background: #ff8661;
+color: white;
+border: none;
+padding: 12px;
+border-radius: 8px;
+cursor: pointer;
+font-size: 1.2rem;
+transition: all 0.3s ease;
+box-shadow: 0 4px 12px rgba(255, 134, 97, 0.3);
+}
+
+.hamburger-menu-btn:hover {
+background: #ff7043;
+transform: scale(1.05);
+}
+
+/* Sidebar Overlay */
+.sidebar-overlay {
+display: none;
+position: fixed;
+top: 0;
+left: 0;
+right: 0;
+bottom: 0;
+background: rgba(0, 0, 0, 0.7);
+z-index: 999;
+backdrop-filter: blur(4px);
+}
+
+/* Sidebar Header */
+.sidebar-header {
+display: flex;
+justify-content: space-between;
+align-items: center;
+margin-bottom: 24px;
+}
+
+.sidebar-close-btn {
+display: none;
+background: rgba(255, 255, 255, 0.1);
+border: none;
+color: #b2dfdb;
+padding: 8px;
+border-radius: 6px;
+cursor: pointer;
+font-size: 1.1rem;
+transition: all 0.2s ease;
+}
+
+.sidebar-close-btn:hover {
+background: rgba(255, 255, 255, 0.2);
+color: #eaf6f7;
+}
+
+/* Responsive Design for Transaksionet */
+@media (max-width: 768px) {
+/* Show hamburger menu */
+.hamburger-menu-btn {
+  display: block;
+}
+
+/* Show overlay when sidebar is open */
+.sidebar-overlay {
+  display: block;
+}
+
+/* Show close button in sidebar */
+.sidebar-close-btn {
+  display: block;
+}
+
+/* Sidebar mobile behavior */
+.sidebar {
+  transform: translateX(-100%);
+  width: 280px;
+}
+
+.sidebar.sidebar-open {
+  transform: translateX(0);
+}
+
+/* Main content full width on mobile */
+.dashboard-main {
+  margin-left: 0;
+  padding: 20px 16px;
+  padding-top: 80px; /* Space for hamburger button */
+}
+
+/* Container adjustments */
+.transaksionet-advanced-container {
+  width: 100%;
+  max-width: 100%;
+  padding: 20px 12px;
+  margin: 0 auto;
+}
+
+.transaksionet-header-advanced h2 {
+  font-size: 1.8rem;
+}
+
+.transaksionet-header-advanced,
+.transaksionet-action-buttons {
+  flex-direction: column;
+  align-items: center;
+}
+
+.transaksionet-balance-chart-row {
+  flex-direction: column;
+  gap: 20px;
+}
+
+.transaksionet-filters-advanced {
+  flex-direction: column;
+  gap: 12px;
+}
+
+.transaksionet-filters-advanced input,
+.transaksionet-filters-advanced select {
+  width: 100%;
+}
+
+.transaksionet-table-advanced-wrap {
+  overflow-x: auto;
+  border-radius: 12px;
+  background: #23243a;
+  padding: 16px;
+  position: relative;
+}
+
+.transaksionet-table-advanced-wrap::after {
+  content: "← Scroll për më shumë →";
+  position: absolute;
+  bottom: 8px;
+  right: 16px;
+  background: rgba(255, 134, 97, 0.9);
+  color: white;
+  padding: 4px 8px;
+  border-radius: 4px;
+  font-size: 0.7rem;
+  font-weight: 500;
+  pointer-events: none;
+  opacity: 0.8;
+}
+
+.transaksionet-table-advanced {
+  min-width: 600px;
+  width: 100%;
+}
+
+.transaksionet-table-advanced th, 
+.transaksionet-table-advanced td {
+  padding: 12px 8px;
+  font-size: 0.9rem;
+  white-space: nowrap;
+}
+
+/* Hide less important columns on mobile */
+.transaksionet-table-advanced th:nth-child(6),
+.transaksionet-table-advanced td:nth-child(6),
+.transaksionet-table-advanced th:nth-child(7),
+.transaksionet-table-advanced td:nth-child(7) {
+  display: none;
+}
+
+.modal-content {
+  width: 95%;
+  padding: 24px;
+}
+}
+
+@media (max-width: 480px) {
+.hamburger-menu-btn {
+  top: 15px;
+  left: 15px;
+  padding: 10px;
+  font-size: 1rem;
+}
+
+.dashboard-main {
+  padding: 15px 12px;
+  padding-top: 70px;
+}
+
+.transaksionet-advanced-container {
+  padding: 15px 8px;
+}
+
+.transaksionet-header-advanced h2 {
+  font-size: 1.6rem;
+}
+
+.transaksionet-balance-box {
+  padding: 14px 20px;
+  font-size: 1rem;
+}
+
+.transaksionet-table-advanced-wrap {
+  padding: 12px;
+}
+
+.transaksionet-table-advanced {
+  min-width: 500px;
+}
+
+.transaksionet-table-advanced th, 
+.transaksionet-table-advanced td {
+  padding: 8px 6px;
+  font-size: 0.8rem;
+}
+
+/* Hide more columns on very small screens */
+.transaksionet-table-advanced th:nth-child(5),
+.transaksionet-table-advanced td:nth-child(5) {
+  display: none;
+}
+
+.modal-content {
+  width: 98%;
+  padding: 20px;
+}
+
+.sidebar {
+  width: 260px;
+  padding: 20px;
+}
+}
+
+@media (max-width: 400px) {
+.transaksionet-table-advanced {
+  min-width: 400px;
+}
+
+.transaksionet-table-advanced th, 
+.transaksionet-table-advanced td {
+  padding: 6px 4px;
+  font-size: 0.75rem;
+}
+
+/* Show only essential columns */
+.transaksionet-table-advanced th:nth-child(1),
+.transaksionet-table-advanced td:nth-child(1),
+.transaksionet-table-advanced th:nth-child(2),
+.transaksionet-table-advanced td:nth-child(2),
+.transaksionet-table-advanced th:nth-child(4),
+.transaksionet-table-advanced td:nth-child(4),
+.transaksionet-table-advanced th:nth-child(8),
+.transaksionet-table-advanced td:nth-child(8) {
+  display: table-cell;
+}
+
+.transaksionet-table-advanced th:nth-child(3),
+.transaksionet-table-advanced td:nth-child(3),
+.transaksionet-table-advanced th:nth-child(5),
+.transaksionet-table-advanced td:nth-child(5),
+.transaksionet-table-advanced th:nth-child(6),
+.transaksionet-table-advanced td:nth-child(6),
+.transaksionet-table-advanced th:nth-child(7),
+.transaksionet-table-advanced td:nth-child(7) {
+  display: none;
+}
+} 
+
+/* Mobile Card Layout for very small screens */
+@media (max-width: 400px) {
+.transaksionet-table-advanced-wrap {
+  overflow-x: visible;
+  padding: 0;
+  background: none;
+}
+
+.transaksionet-table-advanced {
+  display: block;
+  min-width: auto;
+  border-spacing: 0;
+}
+
+.transaksionet-table-advanced thead {
+  display: none;
+}
+
+.transaksionet-table-advanced tbody {
+  display: block;
+}
+
+.transaksionet-table-advanced tr {
+  display: block;
+  background: #23243a;
+  border-radius: 12px;
+  padding: 16px;
+  margin-bottom: 12px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+}
+
+.transaksionet-table-advanced td {
+  display: block;
+  text-align: left;
+  padding: 8px 0;
+  border: none;
+  background: none;
+  min-width: auto;
+  position: relative;
+}
+
+.transaksionet-table-advanced td::before {
+  content: attr(data-label);
+  font-weight: 600;
+  color: #1de9b6;
+  display: inline-block;
+  width: 80px;
+  margin-right: 8px;
+}
+
+.transaksionet-table-advanced td:last-child {
+  text-align: right;
+  padding-top: 12px;
+  border-top: 1px solid #3d3f55;
+  margin-top: 8px;
+}
+
+.transaksionet-table-advanced td:last-child::before {
+  display: none;
+}
+
+/* Hide scroll indicator on card layout */
+.transaksionet-table-advanced-wrap::after {
+  display: none;
+}
+}
+
+/* Modal për konfirmimin e daljes */
+.modal-bg {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.8);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+  backdrop-filter: blur(4px);
+}
+
+.modal-content {
+  background: linear-gradient(135deg, rgba(255, 255, 255, 0.1), rgba(255, 255, 255, 0.05));
+  backdrop-filter: blur(25px);
+  border-radius: 24px;
+  border: 1px solid rgba(100, 255, 218, 0.2);
+  box-shadow:
+    0 25px 80px rgba(0, 0, 0, 0.3),
+    0 0 0 1px rgba(100, 255, 218, 0.1),
+    inset 0 1px 0 rgba(255, 255, 255, 0.1);
+  position: relative;
+  overflow: hidden;
+  padding: 32px;
+  width: 90%;
+  max-width: 500px;
+  max-height: 90vh;
+  overflow-y: auto;
+}
+
+.modal-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 20px;
+  padding-bottom: 16px;
+  border-bottom: 1px solid rgba(100, 255, 218, 0.2);
+}
+
+.modal-header h3 {
+  font-size: 1.4rem;
+  font-weight: 700;
+  background: linear-gradient(135deg, #64ffda, #00bcd4);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  margin: 0;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  text-shadow: 0 2px 4px rgba(100, 255, 218, 0.2);
+}
+
+.modal-close-btn {
+  background: linear-gradient(135deg, rgba(100, 255, 218, 0.1), rgba(0, 188, 212, 0.1));
+  border: 1px solid rgba(100, 255, 218, 0.3);
+  border-radius: 12px;
+  width: 36px;
+  height: 36px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #64ffda;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  font-size: 1rem;
+  backdrop-filter: blur(10px);
+}
+
+.modal-close-btn:hover {
+  background: linear-gradient(135deg, rgba(100, 255, 218, 0.2), rgba(0, 188, 212, 0.2));
+  color: #fff;
+  border-color: rgba(100, 255, 218, 0.5);
+  box-shadow: 0 4px 12px rgba(100, 255, 218, 0.3);
+  transform: scale(1.1);
+}
+
+.modal-body {
+  padding: 20px 0;
+  text-align: center;
+}
+
+.modal-body p {
+  font-size: 1rem;
+  color: #b2dfdb;
+  margin: 0;
+  line-height: 1.6;
+}
+
+.modal-actions {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  margin-top: 20px;
+}
+
+.modal-actions .cancel-btn,
+.modal-actions .confirm-btn {
+  width: 100%;
+  padding: 12px 20px;
+  border: none;
+  border-radius: 10px;
+  font-size: 0.95rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.modal-actions .cancel-btn {
+  background: linear-gradient(135deg, rgba(255, 255, 255, 0.1), rgba(255, 255, 255, 0.05));
+  color: #b2dfdb;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  backdrop-filter: blur(10px);
+}
+
+.modal-actions .cancel-btn:hover {
+  background: linear-gradient(135deg, rgba(255, 255, 255, 0.2), rgba(255, 255, 255, 0.1));
+  color: #eaf6f7;
+  transform: translateY(-1px);
+  box-shadow: 0 4px 12px rgba(255, 255, 255, 0.1);
+}
+
+.modal-actions .confirm-btn {
+  background: linear-gradient(135deg, #ff6b6b, #ee5a52);
+  color: white;
+  box-shadow: 0 4px 16px rgba(255, 107, 107, 0.3);
+}
+
+.modal-actions .confirm-btn:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 6px 20px rgba(255, 107, 107, 0.4);
+  background: linear-gradient(135deg, #ff5252, #d32f2f);
+} 

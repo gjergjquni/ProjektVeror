@@ -1,0 +1,60 @@
+.icon-input-wrapper {
+  position: relative;
+  width: 100%;
+}
+
+.icon-input {
+  width: 100%;
+  padding-left: 44px;
+  padding-right: 16px;
+  box-sizing: border-box;
+  min-width: 0;
+  font-size: 1rem;
+  border: 1.2px solid #00eaff;
+  border-radius: 7px;
+  background: rgba(0,0,0,0.18);
+  color: #eaffff;
+  outline: none;
+  transition: border 0.2s, box-shadow 0.2s;
+  height: 44px;
+}
+
+.input-icon-left {
+  position: absolute;
+  left: 14px;
+  top: 50%;
+  transform: translateY(-50%);
+  color: #00eaff;
+  font-size: 1.2rem;
+  pointer-events: none;
+  display: flex;
+  align-items: center;
+}
+
+.input-icon-left svg {
+  stroke: #fff !important;
+  filter: brightness(0) invert(1) !important;
+}
+
+.input-icon-left path,
+.input-icon-left rect,
+.input-icon-left circle {
+  stroke: #fff !important;
+  fill: none !important;
+}
+
+@media (max-width: 600px) {
+  .icon-input {
+    padding-left: 34px;
+    font-size: 0.95rem;
+    height: 38px;
+  }
+  .input-icon-left {
+    left: 8px;
+  }
+} 
+@media (max-width: 900px) {
+  .login-glass {
+    margin-top: -500px;
+  }
+}
