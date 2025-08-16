@@ -3,7 +3,7 @@ import React, { useState } from 'react';
 // Importimi i stileve CSS
 import './AuthLayout.css';
 // Importimi i ikonës së email-it
-import emailIcon from '../img/email-icon-removebg-preview.png';
+import emailIcon from '../../img/email-icon-removebg-preview.png';
 
 // Komponenti i formularit të login-it
 function LoginForm({ onSwitch, onForgotPassword, onLogin }) {

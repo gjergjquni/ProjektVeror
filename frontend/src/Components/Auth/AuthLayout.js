@@ -1,6 +1,6 @@
 import React from 'react';
 import './AuthLayout.css';
-import logo1 from '../img/logo1.png';
+import logo1 from '../../img/logo1.png';
 
 function AuthLayout({ children }) {
   return (

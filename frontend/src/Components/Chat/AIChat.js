@@ -1,7 +1,7 @@
 import React, { useState, useRef, useEffect } from 'react';
 import { FaBars, FaTimes, FaHome, FaExchangeAlt, FaBullseye, FaRobot, FaCog, FaQuestionCircle } from 'react-icons/fa';
 import './AIChat.css';
-import logo from '../img/logo1.png';
+import logo from '../../img/logo1.png';
 
 const AIChat = ({ currentPage, onNavigate }) => {
   const [messages, setMessages] = useState([]);

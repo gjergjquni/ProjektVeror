@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import './AuthLayout.css';
-import emailIcon from '../img/email-icon-removebg-preview.png';
+import emailIcon from '../../img/email-icon-removebg-preview.png';
 
 function ForgotPasswordForm({ onBack }) {
   const [email, setEmail] = useState('');

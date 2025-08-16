@@ -3,8 +3,8 @@ import React, { useState, useEffect } from 'react';
 // Importimi i stileve CSS
 import './AuthLayout.css';
 // Importimi i ikonave
-import emailIcon from '../img/email-icon-removebg-preview.png';
-import userIcon from '../img/user.icon.png';
+import emailIcon from '../../img/email-icon-removebg-preview.png';
+import userIcon from '../../img/user.icon.png';
 
 // Komponenti i formularit të regjistrimit
 function RegisterForm({ onSwitch }) {

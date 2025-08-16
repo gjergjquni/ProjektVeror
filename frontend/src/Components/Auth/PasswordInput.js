@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import './PasswordInput.css';
-import eyeOpen from '../img/eye-open-1-removebg-preview.png';
-import eyeClose from '../img/eye-close-removebg-preview.png';
+import eyeOpen from '../../img/eye-open-1-removebg-preview.png';
+import eyeClose from '../../img/eye-close-removebg-preview.png';
 
 function PasswordInput({ value, onChange, placeholder = "Fjalëkalimi", name = "password", required = false, onValidationChange }) {
   const [visible, setVisible] = useState(false);

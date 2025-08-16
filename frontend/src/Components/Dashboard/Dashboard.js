@@ -1,7 +1,7 @@
 import React from 'react';
 import { FaHome, FaExchangeAlt, FaBullseye, FaRobot, FaCog, FaQuestionCircle, FaWallet, FaArrowUp, FaArrowDown } from 'react-icons/fa';
 import './Dashboard.css';
-import logo from '../img/logo1.png';
+import logo from '../../img/logo1.png';
 import { FaBell, FaExclamationTriangle } from 'react-icons/fa';
 
 const userName = 'Ledion';

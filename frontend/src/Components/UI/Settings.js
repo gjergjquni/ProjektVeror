@@ -3,7 +3,7 @@ import React, { useState, useEffect } from 'react';
 // Importimi i ikonave nga react-icons
 import { FaCog, FaUser, FaBell, FaPalette, FaGlobe, FaSignOutAlt, FaTrash, FaEdit, FaEye, FaEyeSlash, FaHome, FaExchangeAlt, FaBullseye, FaRobot, FaQuestionCircle, FaBars, FaTimes, FaGraduationCap, FaBriefcase, FaInfoCircle } from 'react-icons/fa';
 import './Settings.css';
-import logo from '../img/logo1.png';
+import logo from '../../img/logo1.png';
 
 // Komponenti i Settings
 export default function Settings({ currentPage, onNavigate }) {

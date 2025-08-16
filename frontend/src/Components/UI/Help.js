@@ -3,7 +3,7 @@ import React, { useState } from 'react';
 // Importimi i ikonave nga react-icons
 import { FaHome, FaExchangeAlt, FaBullseye, FaRobot, FaCog, FaQuestionCircle, FaBars, FaTimes, FaPlus, FaMinus, FaBook, FaShieldAlt, FaEnvelope, FaExclamationTriangle } from 'react-icons/fa';
 import './Help.css';
-import logo from '../img/logo1.png';
+import logo from '../../img/logo1.png';
 
 // Komponenti i Help
 export default function Help({ currentPage, onNavigate }) {

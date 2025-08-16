@@ -1,17 +1,17 @@
 // Importimi i librarive të nevojshme nga React
 import React, { useState } from 'react';
 // Importimi i komponentëve të ndryshëm të aplikacionit
-import LoginForm from './Components/LoginForm';
-import RegisterForm from './Components/RegisterForm';
-import ForgotPasswordForm from './Components/ForgotPasswordForm';
-import AuthLayout from './Components/AuthLayout';
+import LoginForm from './Components/Auth/LoginForm';
+import RegisterForm from './Components/Auth/RegisterForm';
+import ForgotPasswordForm from './Components/Auth/ForgotPasswordForm';
+import AuthLayout from './Components/Auth/AuthLayout';
 import './App.css';
-import HomeDashboard from './Components/HomeDashboard';
-import Transaksionet from './Components/Transaksionet';
-import Qellimet from './Components/Qellimet';
-import AIChat from './Components/AIChat';
-import Settings from './Components/Settings';
-import Help from './Components/Help';
+import HomeDashboard from './Components/Dashboard/HomeDashboard';
+import Transaksionet from './Components/Dashboard/Transaksionet';
+import Qellimet from './Components/Dashboard/Qellimet';
+import AIChat from './Components/Chat/AIChat';
+import Settings from './Components/UI/Settings';
+import Help from './Components/UI/Help';
 
 // Të dhënat fillestare të transaksioneve - këto janë transaksione shembull që shfaqen kur aplikacioni hapet
 const initialTransaksionet = [

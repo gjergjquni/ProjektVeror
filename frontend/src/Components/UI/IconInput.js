@@ -1,7 +1,7 @@
 import React from 'react';
 import './IconInput.css';
-import emailIcon from '../img/email-icon-removebg-preview.png';
-import newUserIcon from '../img/user.icon.png';
+import emailIcon from '../../img/email-icon-removebg-preview.png';
+import newUserIcon from '../../img/user.icon.png';
 
 function IconInput({ value, onChange, placeholder = "Email", name = "email", type = "email", required = false }) {
   // Choose icon based on input type or name

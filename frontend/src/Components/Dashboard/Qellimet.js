@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import './Qellimet.css';
-import logo from '../img/logo1.png';
+import logo from '../../img/logo1.png';
 import { FaHome, FaExchangeAlt, FaBullseye, FaRobot, FaCog, FaQuestionCircle, FaEdit, FaTrash, FaPlus, FaLaptop, FaPlane, FaCar, FaGraduationCap, FaHeart, FaGift, FaQuestion, FaBars, FaTimes } from 'react-icons/fa';
 
 const kategoriaOptions = [

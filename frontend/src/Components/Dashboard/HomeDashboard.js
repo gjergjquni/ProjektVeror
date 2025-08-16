@@ -3,7 +3,7 @@ import React, { useState } from 'react';
 // Importimi i ikonave nga react-icons për të përdorur në aplikacion
 import { FaWallet, FaArrowUp, FaArrowDown, FaBell, FaExclamationTriangle, FaPlus, FaTimes } from 'react-icons/fa';
 import './HomeDashboard.css';
-import logo from '../img/logo1.png';
+import logo from '../../img/logo1.png';
 import { FaHome, FaExchangeAlt, FaBullseye, FaRobot, FaCog, FaQuestionCircle, FaBars } from 'react-icons/fa';
 
 // Emri i përdoruesit - për momentin i vendosur statikisht

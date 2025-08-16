@@ -1,7 +1,7 @@
 // Importimi i librarive të nevojshme nga React
 import React, { useState } from 'react';
 import './Transaksionet.css';
-import logo from '../img/logo1.png';
+import logo from '../../img/logo1.png';
 // Importimi i ikonave nga react-icons për të përdorur në aplikacion
 import { FaHome, FaExchangeAlt, FaBullseye, FaRobot, FaCog, FaQuestionCircle, FaEdit, FaTrash, FaPlus, FaUtensils, FaBus, FaMoneyBillWave, FaFilm, FaQuestion, FaBars, FaTimes } from 'react-icons/fa';
 
